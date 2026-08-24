@@ -1,0 +1,31 @@
+Bootstrap: docker
+From: ubuntu:22.04
+
+%post
+    # Install minimal dependencies for installation
+    apt-get update && apt-get install -y wget bzip2 && apt-get clean
+
+    # Download and install Miniforge
+    wget "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh" -O miniforge.sh
+    bash miniforge.sh -b -p /opt/miniforge
+    rm miniforge.sh
+    
+    # Export path to use mamba
+    export PATH=/opt/miniforge/bin:$PATH
+    
+    # Use mamba to install tools from bioconda and conda-forge
+    mamba install -y -c conda-forge -c bioconda \
+        samtools=1.21 \
+        bedtools=2.31.1 \
+        gawk=5.1.0
+        
+    # Clean up conda cache to keep the image small
+    mamba clean -afy
+
+%environment
+    export PATH=/opt/miniforge/bin:$PATH
+
+%labels
+    Maintainer John Juma
+    Version v1.2
+    Description "Optimized environment using Miniforge and Mamba for rapid dependency resolution."

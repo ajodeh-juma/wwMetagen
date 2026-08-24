@@ -1,0 +1,44 @@
+Pathogen	Strain	Segment	TaxID	Length_nt	RefSeq_Assembly	Accession	NCBI_FTP_Path
+Acinetobacter baumannii	ATCC 19606	chromosome	470	3976747	GCF_000737145.1	NC_009085.1	ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/737/145/GCF_000737145.1_ASM73714v1/
+Escherichia coli	K-12 MG1655	chromosome	562	4642497	GCF_000005845.2	NC_000913.3	ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/005/845/GCF_000005845.2_ASM584v2/
+Klebsiella pneumoniae	HS11286	chromosome	573	5331949	GCF_000240185.1	NC_016845.1	ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/240/185/GCF_000240185.1_ASM24018v2/
+Mycobacterium tuberculosis	H37Rv	chromosome	1773	4411532	GCF_000195955.2	NC_000962.3	ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/195/955/GCF_000195955.2_ASM19595v2/
+Enterococcus faecium	DO	chromosome	1352	2695335	GCF_000174395.2	NC_017960.1	ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/174/395/GCF_000174395.2_ASM17439v2/
+Staphylococcus aureus	N315	chromosome	1280	2814816	GCF_000009645.1	NC_002745.2	ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/009/645/GCF_000009645.1_ASM964v1/
+Salmonella enterica Typhi	CT18	chromosome	90370	4809037	GCF_000195995.1	NC_003198.1	ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/195/995/GCF_000195995.1_ASM19599v1/
+Salmonella enterica Typhimurium	LT2	chromosome	99287	4857432	GCF_000006945.2	NC_003197.2	ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/006/945/GCF_000006945.2_ASM694v2/
+Shigella flexneri	2a 301	chromosome	623	4607203	GCF_000006925.2	NC_004337.2	ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/006/925/GCF_000006925.2_ASM692v2/
+Pseudomonas aeruginosa	PAO1	chromosome	287	6264404	GCF_000006765.1	NC_002516.2	ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/006/765/GCF_000006765.1_ASM676v1/
+Neisseria gonorrhoeae	FA1090	chromosome	485	2153546	GCF_000006845.1	NC_002946.2	ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/006/845/GCF_000006845.1_ASM684v1/
+Streptococcus pyogenes	MGAS5005	chromosome	1314	1833837	GCF_000011865.1	NC_007297.2	ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/011/865/GCF_000011865.1_ASM1186v1/
+Streptococcus pneumoniae	TIGR4	chromosome	1313	2160842	GCF_000006885.1	NC_003028.3	ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/006/885/GCF_000006885.1_ASM688v1/
+Haemophilus influenzae	Rd KW20	chromosome	727	1830138	GCF_000027305.1	NC_000907.1	ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/027/305/GCF_000027305.1_ASM2730v1/
+Streptococcus agalactiae	A909	chromosome	1311	2125114	GCF_000007265.1	NC_007432.1	ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/007/265/GCF_000007265.1_ASM726v1/
+Vibrio cholerae	N16961	chromosome_1	666	2961149	GCF_000006745.1	NC_002505.1	ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/006/745/GCF_000006745.1_ASM674v1/
+Vibrio cholerae	N16961	chromosome_2	666	1072315	GCF_000006745.1	NC_002506.1	ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/006/745/GCF_000006745.1_ASM674v1/
+SARS-CoV-2	Wuhan-Hu-1	genome	2697049	29903	GCF_009858895.2	NC_045512.2	ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/009/858/895/GCF_009858895.2_ASM985889v3/
+Ebola virus	Mayinga	genome	186538	18959	GCF_000848505.1	NC_002549.1	ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/848/505/GCF_000848505.1_ViralProj14015/
+Marburg virus	Angola	genome	11269	19111	GCF_000854785.1	NC_001608.3	ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/854/785/GCF_000854785.1_ViralProj15117/
+Lassa virus	Josiah	L_segment	11620	7279	GCF_000854865.1	NC_004296.1	ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/854/865/GCF_000854865.1_ViralProj15123/
+Lassa virus	Josiah	S_segment	11620	3402	GCF_000854865.1	NC_004297.1	ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/854/865/GCF_000854865.1_ViralProj15123/
+Influenza A virus	A/Puerto Rico/8/1934(H1N1)	PB2	11320	2341	GCF_000865085.1	NC_002016.1	ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/865/085/GCF_000865085.1_ViralProj15143/
+Influenza A virus	A/Puerto Rico/8/1934(H1N1)	PB1	11320	2341	GCF_000865085.1	NC_002017.1	ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/865/085/GCF_000865085.1_ViralProj15143/
+Influenza A virus	A/Puerto Rico/8/1934(H1N1)	PA	11320	2233	GCF_000865085.1	NC_002018.1	ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/865/085/GCF_000865085.1_ViralProj15143/
+Influenza A virus	A/Puerto Rico/8/1934(H1N1)	HA	11320	1778	GCF_000865085.1	NC_002019.1	ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/865/085/GCF_000865085.1_ViralProj15143/
+Influenza A virus	A/Puerto Rico/8/1934(H1N1)	NP	11320	1565	GCF_000865085.1	NC_002020.1	ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/865/085/GCF_000865085.1_ViralProj15143/
+Influenza A virus	A/Puerto Rico/8/1934(H1N1)	NA	11320	1413	GCF_000865085.1	NC_002021.1	ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/865/085/GCF_000865085.1_ViralProj15143/
+Influenza A virus	A/Puerto Rico/8/1934(H1N1)	M	11320	1027	GCF_000865085.1	NC_002022.1	ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/865/085/GCF_000865085.1_ViralProj15143/
+Influenza A virus	A/Puerto Rico/8/1934(H1N1)	NS	11320	890	GCF_000865085.1	NC_002023.1	ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/865/085/GCF_000865085.1_ViralProj15143/
+Rotavirus A	SA11	VP1	28875	3302	GCF_000864505.1	NC_011503.2	ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/864/505/GCF_000864505.1_ViralProj15131/
+Rotavirus A	SA11	VP2	28875	2687	GCF_000864505.1	NC_011504.2	ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/864/505/GCF_000864505.1_ViralProj15131/
+Rotavirus A	SA11	VP3	28875	2591	GCF_000864505.1	NC_011505.2	ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/864/505/GCF_000864505.1_ViralProj15131/
+Rotavirus A	SA11	VP4	28875	2362	GCF_000864505.1	NC_011506.2	ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/864/505/GCF_000864505.1_ViralProj15131/
+Respiratory syncytial virus A	A2	genome	208893	15222	GCF_000855565.1	NC_038235.1	ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/855/565/GCF_000855565.1_ViralProj15207/
+Respiratory syncytial virus B	B1	genome	11250	15225	GCF_000855585.1	NC_001781.1	ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/855/585/GCF_000855585.1_ViralProj15208/
+HIV-1	HXB2	genome	11676	9719	GCF_000864765.1	NC_001802.1	ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/864/765/GCF_000864765.1_ViralProj15139/
+HIV-2	ROD	genome	11709	10359	GCF_000865005.1	NC_001722.1	ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/865/005/GCF_000865005.1_ViralProj15141/
+Enterovirus C (Poliovirus)	Mahoney	genome	12083	7441	GCF_000861765.1	NC_002058.3	ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/861/765/GCF_000861765.1_ViralProj15195/
+Pepper mild mottle virus	Reference	genome	12137	6357	GCF_000864625.1	NC_003630.1	ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/864/625/GCF_000864625.1_ViralProj15135/
+crAssphage	Reference	genome	1211417	97065	GCF_000922395.1	NC_024711.1	ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/922/395/GCF_000922395.1_ViralProj198531/
+Bacteroides fragilis	NCTC 9343	chromosome	817	5205140	GCF_000025985.1	NC_003228.3	ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/025/985/GCF_000025985.1_ASM2598v1/
+Monkeypox virus	MPXV-M5312_HM12_Rivers	genome	10244	197209	GCF_027409785.1	NC_063383.1	ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/027/409/785/GCF_027409785.1_ASM2740978v1/

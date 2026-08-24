@@ -43,42 +43,565 @@
                 }
             }
         },
-        "reference_genome_options": {
-            "title": "Reference genome options",
+        "analysis_options": {
+            "title": "Analysis Workflow Options",
+            "type": "object",
+            "description": "Select which specific sub-analysis to execute.",
+            "properties": {
+                "analysis_type": {
+                    "type": "string",
+                    "default": "alignment",
+                    "description": "The specific analysis mode to run.",
+                    "help_text": "Choose 'assembly' for de novo assembly, MAGs and AMR profiling, 'taxonomy' for Kraken2/Bracken, or 'alignment' for specific pathogen mapping (e.g. Vibrio/RVFV).",
+                    "enum": [
+                        "assembly",
+                        "taxonomy",
+                        "alignment"
+                    ]
+                }
+            }
+        },
+        "preprocessing_options": {
+            "title": "Preprocessing options",
+            "type": "object",
+            "fa_icon": "fas fa-terminal",
+            "description": "Parameters for quality control and adapter trimming using fastp.",
+            "properties": {
+                "window_size": {
+                    "type": "integer",
+                    "default": 4,
+                    "description": "The window size for sliding window quality sliding.",
+                    "help_text": "Used in conjunction with quality threshold to trim low-quality bases."
+                },
+                "window_quality": {
+                    "type": "integer",
+                    "default": 20,
+                    "description": "The average quality threshold for the sliding window.",
+                    "help_text": "Bases will be trimmed if the average quality drops below this value.",
+                },
+                "qualified_quality_phred": {
+                    "type": "integer",
+                    "default": 30, 
+                    "description": "Instructs Fastp to apply the --qualified_quality_phred option",
+                    "help_text": "The quality value that a base is qualified. Default 30 means phred quality >=Q30 is qualified"
+                },
+                "unqualified_percent_limit": {
+                    "type": "integer",
+                    "default": 10, 
+                    "description": "Instructs Fastp to apply the --unqualified_percent_limit option",
+                    "help_text": "How many percents of bases are allowed to be unqualified (0~100). Default 10 means 10%"
+                },
+                "min_length": {
+                    "type": "integer",
+                    "default": 50,
+                    "description": "Instructs Fastp to drop the read if it is below a specified length",
+                    "help_text": "Reads below this length will be dropped"
+                },
+                "save_trimmed_reads": {
+                    "type": "boolean",
+                    "description": "Save the trimmed FastQ files in the results directory.",
+                    "help_text": "By default, trimmed FastQ files will not be saved to the results directory. Specify this flag (or set to true in your config file) to copy these files to the results directory when complete.",
+                    "fa_icon": "fas fa-save"
+                },
+                "save_trimmed_fail": {
+                    "type": "boolean",
+                    "description": "Save failed trimmed reads.",
+                    "help_text": "By default, failed trimmed FastQ files will not be saved to the results directory. Specify this flag (or set to true in your config file) to copy these files to the results directory when complete.",
+                    "fa_icon": "fas fa-fast-forward"
+                },
+                "trim_poly_g": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Enable poly-G tail trimming.",
+                    "help_text": "Highly recommended for Illumina 2-color chemistry data (NextSeq/NovaSeq) common in wastewater genomics.",
+                    "fa_icon": "fas fa-cut"
+                }
+            }
+        },
+        "dehosting_options": {
+            "title": "Dehosting Options",
+            "type": "object",
+            "fa_icon": "fas fa-terminal",
+            "description": "Parameters for Hostile (human DNA removal).",
+            "properties": {
+                "hostile_index_name": {
+                    "type": "string",
+                    "default": "human-t2t-hla",
+                    "description": "Name of the Hostile index or path to local index.",
+                    "help_text": "Defaults to 'human-t2t-hla'. Other options include 'human-bowtie2'."
+                },
+                "hostile_db": {
+                    "type": "string",
+                    "fa_icon": "fas fa-dna",
+                    "description": "path to the hostile directory containing host reference and/or indexes."
+                }
+            }
+        },
+        "target_pathogen_options": {
+            "title": "Target pathogen options",
             "type": "object",
             "fa_icon": "fas fa-dna",
             "description": "Reference genome related files and options required for the workflow.",
             "properties": {
-                "genome": {
-                    "type": "string",
-                    "description": "Name of iGenomes reference.",
-                    "fa_icon": "fas fa-book",
-                    "help_text": "If using a reference genome configured in the pipeline using iGenomes, use this parameter to give the ID for the reference. This is then used to build the full paths for all required reference genome files e.g. `--genome GRCh38`. \n\nSee the [nf-core website docs](https://nf-co.re/usage/reference_genomes) for more details."
+                "target_pathogen_taxid": {
+                    "type": "integer",
+                    "description": "NCBI taxonomy identifiers (taxid or current scientific name) from a file to use as input",
+                    "help_text": "NCBI taxonomy identifiers (taxid or current scientific name) from a file to use as input",
+                    "default": 573
                 },
-                "fasta": {
+                "marker_taxids": {
                     "type": "string",
-                    "format": "file-path",
-                    "exists": true,
-                    "mimetype": "text/plain",
-                    "pattern": "^\\S+\\.fn?a(sta)?(\\.gz)?$",
-                    "description": "Path to FASTA genome file.",
-                    "help_text": "This parameter is *mandatory* if `--genome` is not specified. If you don't have a BWA index available this will be generated for you automatically. Combine with `--save_reference` to save BWA index for future runs.",
-                    "fa_icon": "far fa-file-code"
+                    "description": "NCBI taxonomy identifiers (taxid or current scientific name) to be used as marker pathogens",
+                    "help_text": "NCBI taxonomy identifiers (taxid or current scientific name) to be used as marker pathogens",
+                    "default": "12239,2955582,817,357276,216816,1579"
                 },
-                "igenomes_ignore": {
+                "assembly_source": {
+                    "type": "string",
+                    "description": "Limit to 'RefSeq' (GCF_) or 'GenBank' (GCA_) genomes (default 'all')",
+                    "help_text": "The source for assembly genome retrieval - either 'refseq', 'genbank' or 'all'",
+                    "default": "all",
+                    "enum": [
+                        "refseq",
+                        "genbank",
+                        "all"
+                    ]
+                },
+                "max_attempts": {
+                    "type": "integer",
+                    "description": "Maximum number of attempts to download genomes",
+                    "help_text": "Maximum number of attempts to download genomes",
+                    "default": 3
+                },
+                "n_genomes": {
+                    "type": "integer",
+                    "description": "For a single taxid provided, the number of genomes to download",
+                    "help_text": "For a single taxid provided, the number of genomes to download",
+                    "default": 2
+                }
+            }
+        },
+        "pathogen_alignment_options": {
+            "title": "Pathogen Alignment Options",
+            "type": "object",
+            "fa_icon": "fas fa-terminal",
+            "description": "Settings for Minimap2 pathogen mapping.",
+            "properties": {
+                "min_mapq": {
+                    "type": "integer",
+                    "default": 20,
+                    "description": "Minimum mapping quality to retain an alignment.",
+                    "help_text": "Lower values allow more reads but increase false positives from cross-mapping."
+                },
+                "save_unaligned": {
                     "type": "boolean",
-                    "description": "Do not load the iGenomes reference config.",
-                    "fa_icon": "fas fa-ban",
-                    "hidden": true,
-                    "help_text": "Do not load `igenomes.config` when running the pipeline. You may choose this option if you observe clashes between custom parameters and those supplied in `igenomes.config`."
+                    "default": false,
+                    "description": "Save reads that did not map to any pathogen in your database."
+                }
+            }
+        },
+         "pathogen_marker_options": {
+            "title": "Pathogen Marker options",
+            "type": "object",
+            "fa_icon": "fas fa-terminal",
+            "description": "Parameters for pathogen metrics options for reporting",
+            "properties": {
+                "ppmov_threshold": {
+                    "type": "integer",
+                    "default": "100.0",
+                    "description": "PMMoV CPM threshold for Sample Status PASS/FAIL",
+                    "help_text": "Defaults to 100.0"
+                }
+            }
+        },
+        "diversity_metrics_options": {
+            "title": "Diversity Metrics options",
+            "type": "object",
+            "fa_icon": "fas fa-terminal",
+            "description": "Parameters for diversity analysis options",
+            "properties": {
+                "diversity_window_size": {
+                    "type": "integer",
+                    "default": "1000",
+                    "description": "Diversity window size in bp to compute nucleotide or Shannon diversity metrics. This is dependent on the genome size of target pathogen",
+                    "help_text": "Defaults to 1000"
+                }
+            }
+        },
+         "variant_calling_options" : {
+            "title": "Variant calling options",
+            "type": "object",
+            "fa_icon": "fas fa-fast-forward",
+            "description": "Options for variant calling",
+            "properties": {
+                "min_depth": {
+                    "type": "integer",
+                    "description": "lofreq minimum coverage depth",
+                    "default": 20,
+                    "fa-icon": "fas fa-cut"
                 },
-                "igenomes_base": {
+                "multiple_testing_correction": {
                     "type": "string",
-                    "format": "directory-path",
-                    "description": "The base path to the igenomes reference files",
-                    "fa_icon": "fas fa-ban",
-                    "hidden": true,
-                    "default": "s3://ngi-igenomes/igenomes/"
+                    "description": "Multiple testing correction type. One of 'bonf', 'holm' or 'fdr'",
+                    "default": "bonf",
+                    "enum": ["bonf", "holm", "fdr"],
+                    "fa-icon": "fas fa-cut"
+                },
+                "strand_bias_threshold": {
+                    "type": "number",
+                    "description": "Maximum p-value allowed, filters out variants with SB p-values below the given threshold",
+                    "default": 30,
+                    "fa-icon": "fas fa-cut"
+                },
+                "min_allele_freq": {
+                    "type": "number",
+                    "description": "Minimum allele frequency threshold for calling variant ",
+                    "default": 0.05,
+                    "fa-icon": "fas fa-cut"
+                },
+                "min_qual_score": {
+                    "type": "number",
+                    "description": "Minimum Phred-scaled probability that a polymorphism exists at a site",
+                    "default": 50,
+                    "fa-icon": "fas fa-cut"
+                }
+            }
+        },
+        "consensus genome annotation_options" : {
+            "title": "Consensus genome annotation options",
+            "type": "object",
+            "fa_icon": "fas fa-terminal",
+            "description": "Options to adjust parameters for binning metagenomes.",
+            "properties": {
+                "bakta_db_type": {
+                    "type": "string",
+                    "default": "full",
+                    "description": "Bakta database type to download",
+                    "help_text": "Bakta database type to download",
+                    "fa_icon": "fas fa-cut",
+                    "enum": ["full", "light"]
+                },
+                "genus": {
+                    "type": "string",
+                    "default": null,
+                    "description": "The target pathogen genus e.g Klebsiella",
+                    "help_text": "Scientific name of the target pathogen genus",
+                    "fa_icon": "fas fa-cut"
+                },
+                "species": {
+                    "type": "string",
+                    "default": null,
+                    "description": "The target pathogen species e.g pneumoniae",
+                    "help_text": "Scientific name of the target pathogen species",
+                    "fa_icon": "fas fa-cut"
+                },
+                "centre": {
+                    "type": "string",
+                    "default": "PROKKA",
+                    "description": "The centre name for prokka annotation",
+                    "help_text": "The centre name for prokka annotation",
+                    "fa_icon": "fas fa-cut"
+                },
+                "proteins": {
+                    "type": "number",
+                    "default": null,
+                    "description": "FASTA file of trusted proteins to first annotate from (optional)",
+                    "fa_icon": "fas fa-cut"
+                },
+                "prodigal_tf": {
+                    "type": "string",
+                    "default": null,
+                    "description": "Training file to use for Prodigal (optional)",
+                    "fa_icon": "fas fa-cut"
+                },
+                "regions": {
+                    "type": "string",
+                    "default": null,
+                    "description": "GFF3 or GenBank file of pre-annotated regions (optional)",
+                    "fa_icon": "fas fa-cut"
+                },
+                "hmms": {
+                    "type": "string",
+                    "default": null,
+                    "description": "HMM database file for custom annotation (optional)",
+                    "fa_icon": "fas fa-cut"
+                }
+            }
+        },
+        "assembly_options" : {
+            "title": "Assembly options",
+            "type": "object",
+            "fa_icon": "fas fa-terminal",
+            "description": "Options to adjust parameters assembly of metagenomic reads.",
+            "properties": {
+                "kmin": {
+                    "type": "integer",
+                    "default": 21,
+                    "description": "Instructs megahit on the minimum kmer size (<= 255), must be odd number",
+                    "fa_icon": "fas fa-cut"
+                },
+                "kmax": {
+                    "type": "integer",
+                    "default": 141,
+                    "description": "Instructs megahit on the maximum kmer size (<= 255), must be odd number",
+                    "fa_icon": "fas fa-cut"
+                },
+                "kstep": {
+                    "type": "integer",
+                    "default": 20,
+                    "description": "Instructs megahit on the increment of kmer size of each iteration (<= 28), must be even number",
+                    "fa_icon": "fas fa-cut"
+                },
+                "merge_level": {
+                    "type": "string",
+                    "default": "[20,0.98]",
+                    "description": "Instructs megahit on merge complex bubbles of length <= l*kmer_size and similarity >= [20,0.95]",
+                    "fa_icon": "fas fa-cut"
+                },
+                "prune_level": {
+                    "type": "integer",
+                    "default": 2,
+                    "description": "Instructs megahit on the strength of low depth pruning",
+                    "fa_icon": "fas fa-cut"
+                },
+                "low_local_ratio": {
+                    "type": "number",
+                    "default": 0.2,
+                    "description": "Instructs megahit remove unitigs if its depth is less than this ratio times the average depth of the neighborhoods",
+                    "fa_icon": "fas fa-cut"
+                },
+                "min_contig_length": {
+                    "type": "integer",
+                    "default": 300,
+                    "description": "minimum length of contigs to output",
+                    "fa_icon": "fas fa-cut"
+                }
+            }
+        },
+        "binning_refinement_options" : {
+            "title": "Binning refinement options",
+            "type": "object",
+            "fa_icon": "fas fa-terminal",
+            "description": "Options to adjust parameters for binning metagenomes.",
+            "properties": {
+                "maxbin2_min_contig": {
+                    "type": "integer",
+                    "default": 1500,
+                    "description": "Instructs MaxBin2 to apply a minimum size of a contig for binning.",
+                    "help_text": "Minimum size of a contig for binning using MaxBin2.",
+                    "fa_icon": "fas fa-cut"
+                },
+                "metabat2_min_contig": {
+                    "type": "integer",
+                    "default": 2500,
+                    "description": "Instructs MetaBat2 to apply a minimum size of a contig for binning.",
+                    "help_text": "Minimum size of a contig for binning using MetaBat2.",
+                    "fa_icon": "fas fa-cut"
+                },
+                "concoct_min_contig": {
+                    "type": "integer",
+                    "default": 1500,
+                    "description": "Instructs MaxBin2 to apply a minimum size of a contig for binning.",
+                    "help_text": "Minimum size of a contig for binning using MaxBin2.",
+                    "fa_icon": "fas fa-cut"
+                },
+                "score_threshold": {
+                    "type": "number",
+                    "default": 0.5,
+                    "description": "Score threshold used by until selection algorithm will keep selecting bins",
+                    "fa_icon": "fas fa-cut"
+                },
+                "coverm_method": {
+                    "type": "string",
+                    "default": "mean",
+                    "description": "coverm method for calculating coverage",
+                    "fa_icon": "fas fa-cut",
+                    "enum": ["mean", "trimmed_mean", "tpm", "rpkm", "count"]
+
+                }
+            }
+        },
+        "bins_quality_control_and_identification_options": {
+            "title": "Bins quality control and identification options",
+            "type": "object",
+            "fa_icon": "fas fa-terminal",
+            "description": "Options to adjust parameters for quality control of bins and identification with CheckM2, GTDB-Tk, Check and geNomad.",
+            "properties": {
+                "checkm2_db": {
+                    "type": "string",
+                    "description": "Path to local folder containing already downloaded and uncompressed CheckM2 database.",
+                    "help_text": "The pipeline can also download this for you if not specified, and you can save the resulting directory into an output directory. You should move this directory to somewhere else on your machine (and supply back to the pipeline in future runs again with `--checkm2_db`."
+                },
+                "checkm2_db_zenodo_id": {
+                    "type": "number",
+                    "default": 14897628,
+                    "description": "Zenodo ID to use for downloading the CheckM2 database.",
+                    "help_text": "Zenodo ID to use for downloading the CheckM2 database.",
+                    "enum": [14897628, 5571251, 4671167],
+                    "fa_icon": "fas fa-cut"
+                },
+                "genomad_db": {
+                    "type": "string",
+                    "description": "Database for virus classification with geNomad",
+                    "help_text": "Must be a directory containing the uncompressed contents from https://portal.nersc.gov/genomad/__data__/genomad_db_v1.1.tar.gz"
+                },
+                "genomad_min_score": {
+                    "type": "number",
+                    "default": 0.7,
+                    "description": "Minimum geNomad score for a sequence to be considered viral"
+                },
+                "genomad_splits": {
+                    "type": "integer",
+                    "default": 1,
+                    "description": "Number of groups that geNomad's MMSeqs2 databse should be split into (reduced memory requirements)"
+                },
+                "checkv_db": {
+                    "type": "string",
+                    "description": "Database for quality check with CheckV",
+                    "help_text": "Must be a directory containing the uncompressed contents from https://portal.nersc.gov/genomad/__data__/genomad_db_v1.1.tar.gz"
+                }
+            }
+        },
+        "MAGs_taxonomic_classification_options" : {
+            "title": "Taxonomic classification - GTDB-Tk assigns lineage to bacterial MAGs",
+            "type": "object",
+            "fa_icon": "fas fa-terminal",
+            "description": "Taxonomic classification - GTDB-Tk assigns lineage to bacterial MAGs",
+            "properties": {
+                "gtdb_db": {
+                    "type": "string",
+                    "description": "Specify the location of a GTDBTK database. Can be either an uncompressed directory or a `.tar.gz` archive. If not specified will be downloaded for you when GTDBTK or binning QC is not skipped.",
+                    "default": "https://data.ace.uq.edu.au/public/gtdb/data/releases/release220/220.0/auxillary_files/gtdbtk_package/full_package/gtdbtk_r220_data.tar.gz"
+                },
+                "gtdb_mash": {
+                    "type": "string",
+                    "description": "Specify the location of a GTDBTK mash database. If missing, GTDB-Tk will skip the ani_screening step"
+                },
+                "gtdbtk_extension": {
+                    "type": "string",
+                    "description": "Specify the extension of the bins",
+                    "default": "fa"
+                },
+                "gtdbtk_min_completeness": {
+                    "type": "number",
+                    "default": 50.0,
+                    "description": "Min. bin completeness (in %) required to apply GTDB-tk classification.",
+                    "help_text": "Completeness assessed with BUSCO analysis (100% - %Missing). Must be greater than 0 (min. 0.01) to avoid GTDB-tk errors. If too low, GTDB-tk classification results can be impaired due to not enough marker genes!",
+                    "minimum": 0.01,
+                    "maximum": 100
+                },
+                "gtdbtk_max_contamination": {
+                    "type": "number",
+                    "default": 10.0,
+                    "description": "Max. bin contamination (in %) allowed to apply GTDB-tk classification.",
+                    "help_text": "Contamination approximated based on BUSCO analysis (%Complete and duplicated). If too high, GTDB-tk classification results can be impaired due to contamination!",
+                    "minimum": 0,
+                    "maximum": 100
+                },
+                "gtdbtk_min_perc_aa": {
+                    "type": "number",
+                    "default": 10.0,
+                    "description": "Min. fraction of AA (in %) in the MSA for bins to be kept.",
+                    "minimum": 0,
+                    "maximum": 100
+                },
+                "gtdbtk_min_af": {
+                    "type": "number",
+                    "default": 0.65,
+                    "description": "Min. alignment fraction to consider closest genome.",
+                    "minimum": 0,
+                    "maximum": 1
+                },
+                "gtdbtk_pplacer_cpus": {
+                    "type": "number",
+                    "default": 1.0,
+                    "description": "Number of CPUs used for the by GTDB-Tk run tool pplacer.",
+                    "help_text": "A low number of CPUs helps to reduce the memory required/reported by GTDB-Tk. See also the [GTDB-Tk documentation](https://ecogenomics.github.io/GTDBTk/faq.html#gtdb-tk-reaches-the-memory-limit-pplacer-crashes)."
+                },
+                "gtdbtk_pplacer_scratch": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Reduce GTDB-Tk memory consumption by running pplacer in a setting writing to disk.",
+                    "help_text": "Will be slower. Set to `false` to turn this off."
+                }
+            }
+        },
+        "abricate_options": {
+            "title": "Abricate Options",
+            "type": "object",
+            "description": "Parameters for AMR and Virulence screening using Abricate",
+            "properties": {
+                "abricate_dbs": {
+                    "type": "string",
+                    "default": "vfdb,card,resfinder,plasmidfinder",
+                    "description": "Comma-separated list of Abricate databases to use.",
+                    "help_text": "Available: carbapenemase, card, ecoh, ecoli_vf, enterobase, megares, ncbi, plasmidfinder, resfinder, vfdb."
+                }
+            }
+        },
+        "amrfinder_options": {
+            "title": "AMRFinder Options",
+            "type": "object",
+            "description": "Parameters for AMR and Virulence screening using AMRFinder",
+            "properties": {
+                "amrfinder_organisms": {
+                    "type": "string",
+                    "default": "Vibrio,Escherichia,Klebsiella",
+                    "description": "Comma-separated list of AMARFinder supported organisms to use.",
+                    "help_text": "Available: Acinetobacter, Campylobacter, Enterococcus, Escherichia, Klebsiella, Salmonella, Staphylococcus, Streptococcus, Vibrio."
+                }
+            }
+        },
+        "taxonomic_profiling_options": {
+            "title": "Taxonomic profiling options",
+            "type": "object",
+            "description": "Parameters for taxonomic profiling using Kraken2",
+            "properties": {
+                "kraken2_db": {
+                    "type": "string",
+                    "description": "Specify the path to the Kraken 2 DB.",
+                    "help_text": "Kraken 2 database name (path)"
+                },
+                "confidence": {
+                    "type": "number",
+                    "default": 0.5,
+                    "description": "Confidence score threshold (default: 0.0); must be in [0, 1].",
+                    "help_text": "parameter between 0 and 1 that sets a threshold for classification based on the proportion of matching k-mers, aimed at reducing false positives.",
+                },
+                "bracken_classification_level": {
+                    "type": "string",
+                    "default": "S",
+                    "description": "Abundance estimation level",
+                    "help_text": "This specifies that abundance estimation will calculate estimated reads for each species. Other possible options are K (kingdom level), P (phylum), C (class), O (order), F (family), and G (genus).",
+                    "enum": ["K", "P", "C", "O", "F", "G", "S"]
+                },
+                "normalization_scale": {
+                    "type": "number",
+                    "default": 1000000,
+                    "description": "Normalization scale for Kraken2 relative abundance, computed as the (number of reads/classified reads) * normalization_scale",
+                    "help_text": "Normalization scale for Kraken2 relative abundance, computed as the (number of reads/classified reads) * normalization_scale"
+                }
+            }
+        },
+        "process_skipping_options": {
+            "title": "Process skipping options",
+            "type": "object",
+            "fa_icon": "fas fa-fast-forward",
+            "description": "Options to skip various steps within the workflow.",
+            "properties": {
+                "skip_multiqc": {
+                    "type": "boolean",
+                    "description": "Skip MultiQC.",
+                    "fa_icon": "fas fa-fast-forward"
+                },
+                "skip_qc": {
+                    "type": "boolean",
+                    "fa_icon": "fas fa-fast-forward",
+                    "description": "Skip all QC steps except for MultiQC."
+                },
+                "skip_trimming": {
+                    "type": "boolean",
+                    "fa_icon": "fas fa-fast-forward",
+                    "description": "Skip quality trimming step."
                 }
             }
         },
@@ -245,7 +768,52 @@
             "$ref": "#/$defs/input_output_options"
         },
         {
-            "$ref": "#/$defs/reference_genome_options"
+            "$ref": "#/$defs/analysis_options"
+        },
+        {
+            "$ref": "#/$defs/preprocessing_options"
+        },
+        {
+            "$ref": "#/$defs/dehosting_options"
+        },
+        {
+            "$ref": "#/$defs/pathogen_alignment_options"
+        },
+        {
+            "$ref": "#/$defs/pathogen_marker_options"
+        },
+        {
+            "$ref": "#/$defs/diversity_metrics_options"
+        },
+        {
+            "$ref": "#/$defs/variant_calling_options"
+        },
+        {
+            "$ref": "#/$defs/target_pathogen_options"
+        },
+        {
+            "$ref": "#/$defs/assembly_options"
+        },
+        {
+            "$ref": "#/$defs/binning_refinement_options"
+        },
+        {
+            "$ref": "#/$defs/bins_quality_control_and_identification_options"
+        },
+        {
+            "$ref": "#/$defs/MAGs_taxonomic_classification_options"
+        },
+        {
+            "$ref": "#/$defs/abricate_options"
+        },
+        {
+            "$ref": "#/$defs/amrfinder_options"
+        },
+        {
+            "$ref": "#/$defs/taxonomic_profiling_options"
+        },
+        {
+            "$ref": "#/$defs/process_skipping_options"
         },
         {
             "$ref": "#/$defs/institutional_config_options"

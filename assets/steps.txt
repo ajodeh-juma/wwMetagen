@@ -1,0 +1,23 @@
+Step 1: Raw Abundance (CPM)Computation: 
+$$CPM = \left( \frac{\text{Total Reads Mapped to Pathogen}}{\text{Total Reads in Sample}} \right) \times 1,000,000$$
+Why: Raw read counts are meaningless because sample sequencing depth varies. CPM provides a common scale.
+Segmented Viruses: For viruses like Influenza, the Python aggregator sums the reads across all segments before calculating CPM.
+
+Step 2: Confidence Metric (Genome Breadth %)Computation: $$\text{Breadth} = \left( \frac{\text{Number of Bases Covered by at least 1 Read}}{\text{Total Reference Genome Length}} \right) \times 100$$
+Why: In metagenomics, we often see "false positives" where many reads map to one tiny, conserved region.
+Rule of Thumb: A high CPM with low Breadth ($<10\%$) is often a mapping artifact. 
+A high CPM with high Breadth ($>70\%$) is a definitive detection.
+
+Step 3: Normalization (The Fecal Ratio)Computation: $$\text{Ratio} = \frac{CPM_{\text{Pathogen}}}{CPM_{\text{Fecal Marker}}}$$
+Why: Sewage flow changes. On a rainy day, your pathogen CPM will drop simply because the sewage is diluted.
+The Hierarchy: We divide by PMMoV first. If PMMoV is missing, we use CrAssphage, then Bacteroides. 
+This ratio represents "Pathogen per human unit," making data comparable across different weather events and city populations.
+
+
+Step 4: Temporal Smoothing (Moving Average)Computation: $$\text{Smooth Value}_{t} = \frac{\text{Ratio}_{t} + \text{Ratio}_{t-1} + \text{Ratio}_{t-2}}{3}$$
+Why: Wastewater data is "noisy." A 3-sample rolling mean smooths out random jitters, allowing the underlying epidemiological trend (the "outbreak curve") to become visible.
+
+Step 5: Statistical Intensity (Z-Score)Computation: $$Z = \frac{\text{Smooth Value}_{\text{Current}} - \text{Historical Mean}}{\text{Historical Standard Deviation}}$$
+Why: A "high" number for Norovirus might be a "low" number for SARS-CoV-2. The Z-score standardizes everything.
+Z > 2.0 (Warning): The pathogen is significantly higher than its usual baseline.
+Z > 3.0 (Critical): The pathogen is in an extreme surge (top 0.1% of historical probability).

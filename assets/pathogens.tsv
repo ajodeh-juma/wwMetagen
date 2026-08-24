@@ -1,0 +1,80 @@
+Pathogen	Strain	Accession
+PMMoV	S	NC_003630.1
+crAssphage	-	NC_024711.1
+Bacteroides fragilis	NCTC 9343	NC_003228.3
+Klebsiella pneumoniae	HS11286	NC_016845.1
+Salmonella Typhi	CT18	NC_003198.1
+Neisseria gonorrhoeae	FA 1090	NC_002946.2
+Haemophilus influenzae	Rd KW20	NC_000907.1
+Salmonella enterica	LT2	NC_003197.2
+MERS-CoV	HCoV-EMC/2012	NC_019843.3
+Marburg virus	Musoke	NC_001608.3
+Dengue virus 1	WestPac-74	NC_001477.1
+Rhinovirus A	HRV-A1	NC_001617.1
+Rhinovirus B	HRV-B14	NC_001490.1
+Influenza A	H1N1 Seg 1 (PB2)	NC_002016.1
+Influenza A	H1N1 Seg 2 (PB1)	NC_002017.1
+Influenza A	H1N1 Seg 3 (PA)	NC_002018.1
+Influenza A	H1N1 Seg 4 (HA)	NC_002019.1
+Influenza A	H1N1 Seg 5 (NP)	NC_002020.1
+Influenza A	H1N1 Seg 6 (NA)	NC_002021.1
+Influenza A	H1N1 Seg 7 (M)	NC_002022.1
+Influenza A	H1N1 Seg 8 (NS)	NC_002023.1
+CCHF virus	L Segment	NC_005301.3
+CCHF virus	M Segment	NC_005300.2
+CCHF virus	S Segment	NC_005302.1
+Chikungunya virus	S27-African	NC_004162.2
+Escherichia coli	K-12 MG1655	NC_000913.3
+Mycobacterium tb	H37Rv	NC_000962.3
+Pseudomonas aeruginosa	PAO1	NC_002516.2
+Streptococcus pneumoniae	R6	NC_003098.1
+HIV-1	HXB2	NC_001802.1
+HIV-2	BEN	NC_001722.1
+Zika virus	MR 766	NC_012532.1
+Variola virus	India-1967	NC_001611.1
+Acinetobacter baumanii	AB307-0294	NC_011586.1
+Shigella dysenteriae	Sd197	NC_007606.1
+Enterococcus faecium	Aus0004	NC_017960.1
+Staphylococcus aureus	NCTC 8325	NC_007795.1
+Vibrio cholerae	O1 El Tor (Chr 1)	NC_002505.1
+Vibrio cholerae	O1 El Tor (Chr 2)	NC_002506.1
+SARS-CoV-2	Wuhan-Hu-1	NC_045512.2
+Ebola virus	Zaire	NC_002703.1
+Nipah virus	Malaysia	NC_002728.1
+Oropouche virus	L Segment	NC_075115.1
+Oropouche virus	M Segment	NC_075116.1
+Oropouche virus	S Segment	NC_075117.1
+Enterovirus	EV-A71	NC_001612.1
+Hendra virus	-	NC_001906.3
+Hepatitis A virus	-	NC_001489.1
+Hepatitis B virus	-	NC_003977.2
+Hepatitis E virus	-	NC_001434.1
+Influenza B	Seg 1 (PB2)	NC_002204.1
+Influenza B	Seg 2 (PB1)	NC_002205.1
+Influenza B	Seg 3 (PA)	NC_002206.1
+Influenza B	Seg 4 (HA)	NC_002207.1
+Influenza B	Seg 5 (NP)	NC_002208.1
+Influenza B	Seg 6 (NA)	NC_002209.1
+Influenza B	Seg 7 (M)	NC_002210.1
+Influenza B	Seg 8 (NS)	NC_002211.1
+Lassa fever virus	L Segment	NC_004297.1
+Lassa fever virus	S Segment	NC_004296.1
+Monkeypox virus	Zaire-96	NC_063383.1
+Norovirus	Norwalk GI	NC_001959.2
+RSV A	A2	NC_038235.1
+RSV B	18537	NC_001781.1
+Rift Valley fever	L Segment	NC_014397.1
+Rift Valley fever	M Segment	NC_014396.1
+Rift Valley fever	S Segment	NC_014395.1
+Rotavirus A	Seg 1	NC_011503.2
+Rotavirus A	Seg 2	NC_011504.2
+Rotavirus A	Seg 3	NC_011505.2
+Rotavirus A	Seg 4	NC_011506.2
+Rotavirus A	Seg 5	NC_011507.2
+Rotavirus A	Seg 6	NC_011508.2
+Rotavirus A	Seg 7	NC_011509.2
+Rotavirus A	Seg 8	NC_011510.2
+Rotavirus A	Seg 9	NC_011511.2
+Rotavirus A	Seg 10	NC_011512.2
+Rotavirus A	Seg 11	NC_011513.2
+Candida auris	B8441	NW_017264771.1
