@@ -1,0 +1,163 @@
+name: genomad_endtoend
+description: |
+  Identify plasmid and virus sequences in assembled contigs with geNomad end-to-end
+keywords:
+  - "genomad"
+  - "virus"
+  - "plasmid"
+  - "binning"
+tools:
+  - genomad:
+      description: Identification of mobile genetic elements (plasmids and viruses) in sequencing data
+      homepage: https://github.com/apcamargo/genomad
+      documentation: https://portal.nersc.gov/genomad/
+      doi: "10.1038/s41587-023-01953-y"
+      licence:
+        - "Artistic-2.0"
+input:
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. [ id:'test', single_end:false ]
+    - fasta:
+        type: file
+        description: Input FASTA sequence file
+  - - genomad_db:
+        type: file
+        description: geNomad database directory
+output:
+  aggregated_classification:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. [ id:'test', single_end:false ]
+      - "*_aggregated_classification/*_aggregated_classification.tsv":
+          type: file
+          description: Aggregated virus/plasmid classification TSV file
+  marker_classification:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. [ id:'test', single_end:false ]
+      - "*_marker_classification/*_marker_classification.tsv":
+          type: file
+          description: Marker-based classification TSV file
+  taxonomy:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. [ id:'test', single_end:false ]
+      - "*_annotate/*_taxonomy.tsv":
+          type: file
+          description: Taxonomy annotation TSV file
+  provirus:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. [ id:'test', single_end:false ]
+      - "*_find_proviruses/*_provirus.tsv":
+          type: file
+          description: Provirus location TSV file
+  compositions:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. [ id:'test', single_end:false ]
+      - "*_score_calibration/*_compositions.tsv":
+          type: file
+          description: Nucleotide composition TSV file
+  calibrated_classification:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. [ id:'test', single_end:false ]
+      - "*_score_calibration/*_calibrated_aggregated_classification.tsv":
+          type: file
+          description: Score-calibrated aggregated classification TSV file
+  plasmid_fasta:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. [ id:'test', single_end:false ]
+      - "*_summary/*_plasmid.fna.gz":
+          type: file
+          description: Plasmid sequences in FASTA format
+  plasmid_genes:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. [ id:'test', single_end:false ]
+      - "*_summary/*_plasmid_genes.tsv":
+          type: file
+          description: Plasmid gene annotation TSV file
+  plasmid_proteins:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. [ id:'test', single_end:false ]
+      - "*_summary/*_plasmid_proteins.faa.gz":
+          type: file
+          description: Plasmid protein sequences in FASTA format
+  plasmid_summary:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. [ id:'test', single_end:false ]
+      - "*_summary/*_plasmid_summary.tsv":
+          type: file
+          description: Plasmid summary TSV file
+  virus_fasta:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. [ id:'test', single_end:false ]
+      - "*_summary/*_virus.fna.gz":
+          type: file
+          description: Virus sequences in FASTA format
+  virus_genes:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. [ id:'test', single_end:false ]
+      - "*_summary/*_virus_genes.tsv":
+          type: file
+          description: Virus gene annotation TSV file
+  virus_proteins:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. [ id:'test', single_end:false ]
+      - "*_summary/*_virus_proteins.faa.gz":
+          type: file
+          description: Virus protein sequences in FASTA format
+  virus_summary:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. [ id:'test', single_end:false ]
+      - "*_summary/*_virus_summary.tsv":
+          type: file
+          description: Virus summary TSV file
+  versions:
+    - - "versions.yml":
+          type: file
+          description: File containing software versions
+authors:
+  - "@ajodeh-juma"
+maintainers:
+  - "@ajodeh-juma"

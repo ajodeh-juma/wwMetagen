@@ -4,14 +4,14 @@
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
-include { METABAT2_SUMMARIZE_DEPTHS }     from '../../modules/local/process/metabat2_summarize_depths'
-include { METABAT2_METABAT2         }     from '../../modules/local/process/metabat2'
-include { MAXBIN2_PILEUP_COVERAGE   }     from '../../modules/local/process/maxbin2_pileup_coverage'
-include { MAXBIN2                   }     from '../../modules/local/process/maxbin2'
-include { CONCOCT_CONCOCT           }     from '../../modules/local/process/concoct_concoct'
-include { CONCOCT_EXTRACTFASTABINS  }     from '../../modules/local/process/concoct_extractfastabins'
-include { DASTOOL_FASTATOCONTIG2BIN }     from '../../modules/local/process/dastool_fastatocontig2bin'
-include { DASTOOL_DASTOOL           }     from '../../modules/local/process/dastool'
+include { METABAT2_SUMMARIZE_DEPTHS }     from '../../modules/local/process/metabat2/summarizedepths/main'
+include { METABAT2_METABAT2         }     from '../../modules/local/process/metabat2/metabat2/main'
+include { MAXBIN2_PILEUP_COVERAGE   }     from '../../modules/local/process/maxbin2/pileupcoverage/main'
+include { MAXBIN2                   }     from '../../modules/local/process/maxbin2/maxbin2/main'
+include { CONCOCT_CONCOCT           }     from '../../modules/local/process/concoct/concoct/main'
+include { CONCOCT_EXTRACTFASTABINS  }     from '../../modules/local/process/concoct/extractfastabins/main'
+include { DASTOOL_FASTATOCONTIG2BIN }     from '../../modules/local/process/dastool/fastatocontig2bin/main'
+include { DASTOOL_DASTOOL           }     from '../../modules/local/process/dastool/dastool/main'
 
 workflow BINNING_REFINEMENT {
     take:

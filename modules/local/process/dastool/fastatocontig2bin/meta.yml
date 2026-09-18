@@ -1,0 +1,47 @@
+name: dastool_fastatocontig2bin
+description: |
+  Convert a set of per-bin FASTA files into a DAS Tool contig-to-bin TSV
+keywords:
+  - "binning"
+  - "dastool"
+  - "metagenomics"
+tools:
+  - das_tool:
+      description: Recovery of genomes from metagenomes via a dereplication, aggregation and scoring strategy
+      homepage: https://github.com/cmks/DAS_Tool
+      doi: "10.1038/s41564-018-0171-1"
+      licence:
+        - "BSD-2-Clause"
+input:
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. [ id:'test', single_end:false ]
+    - bins:
+        type: file
+        description: Recovered genome bin FASTA file(s)
+  - - binner:
+        type: value
+        description: Name of the binning tool that produced the input bins
+output:
+  tsv:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. [ id:'test', single_end:false ]
+      - "*.tsv":
+          type: file
+          description: TSV file
+      - binner:
+          type: value
+          description: Name of the binning tool that produced the input bins
+  versions:
+    - - "versions.yml":
+          type: file
+          description: File containing software versions
+authors:
+  - "@ajodeh-juma"
+maintainers:
+  - "@ajodeh-juma"

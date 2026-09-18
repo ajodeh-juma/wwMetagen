@@ -1,0 +1,41 @@
+name: generate_report
+description: |
+  Generate the wastewater surveillance summary report and plots from combined pathogen metrics
+keywords:
+  - "report"
+  - "wastewater"
+  - "surveillance"
+tools:
+  - wastewater.R:
+      description: Generate the wastewater surveillance summary report and plots (pathogen positivity vs. PMMoV threshold)
+      homepage: https://github.com/ajodeh-juma/wwMetagen/blob/master/bin/wastewater.R
+      licence:
+        - "MIT"
+input:
+  - - metrics_csv:
+        type: file
+        description: Combined per-sample pathogen metrics CSV file
+  - - pmmov_threshold:
+        type: value
+        description: PMMoV positivity threshold used in the surveillance report
+output:
+  report:
+    - - "*_report.csv":
+          type: file
+          description: Report file
+  summary:
+    - - "*_summary.csv":
+          type: file
+          description: Summary file
+  plots:
+    - - "*.png":
+          type: file
+          description: Plots
+  versions:
+    - - "versions.yml":
+          type: file
+          description: File containing software versions
+authors:
+  - "@ajodeh-juma"
+maintainers:
+  - "@ajodeh-juma"

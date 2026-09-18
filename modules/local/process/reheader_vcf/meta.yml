@@ -1,0 +1,55 @@
+name: reheader_vcf
+description: |
+  Reheader a VCF file with contig lengths from a FASTA index and (b)compress/index it with bcftools/tabix
+keywords:
+  - "variants"
+  - "vcf"
+  - "bcftools"
+tools:
+  - samtools:
+      description: Suite of programs for interacting with high-throughput sequencing data
+      homepage: http://www.htslib.org
+      documentation: http://www.htslib.org/doc/samtools.html
+      doi: "10.1093/gigascience/giab008"
+      licence:
+        - "MIT"
+input:
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. [ id:'test', single_end:false ]
+    - vcf:
+        type: file
+        description: VCF file
+  - - meta2:
+        type: map
+        description: |
+          Groovy Map containing reference/secondary sample information
+          e.g. [ id:'test' ]
+    - fai:
+        type: file
+        description: FASTA index (.fai) file
+output:
+  vcf:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. [ id:'test', single_end:false ]
+      - "*.vcf.gz":
+          type: file
+          description: VCF file
+  tbi:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. [ id:'test', single_end:false ]
+      - "*.vcf.gz.tbi":
+          type: file
+          description: Tabix index of the VCF file
+authors:
+  - "@ajodeh-juma"
+maintainers:
+  - "@ajodeh-juma"

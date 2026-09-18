@@ -1,0 +1,42 @@
+name: abricate_summary
+description: |
+  Collate multiple ABRicate reports into a single summary matrix
+keywords:
+  - "amr"
+  - "virulence"
+  - "abricate"
+  - "summary"
+tools:
+  - abricate:
+      description: Mass screening of contigs for antimicrobial resistance or virulence genes
+      homepage: https://github.com/tseemann/abricate
+      documentation: https://github.com/tseemann/abricate
+      licence:
+        - "GPL-2.0-or-later"
+input:
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. [ id:'test', single_end:false ]
+    - reports:
+        type: file
+        description: Report file(s)
+output:
+  report:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. [ id:'test', single_end:false ]
+      - "*.txt":
+          type: file
+          description: Report file
+  versions:
+    - - "versions.yml":
+          type: file
+          description: File containing software versions
+authors:
+  - "@ajodeh-juma"
+maintainers:
+  - "@ajodeh-juma"

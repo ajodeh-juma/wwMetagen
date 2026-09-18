@@ -1,0 +1,27 @@
+name: genomad_downloaddatabase
+description: |
+  Download the geNomad reference database
+keywords:
+  - "genomad"
+  - "database"
+  - "virus"
+  - "plasmid"
+tools:
+  - genomad:
+      description: Identification of mobile genetic elements (plasmids and viruses) in sequencing data
+      homepage: https://github.com/apcamargo/genomad
+      documentation: https://portal.nersc.gov/genomad/
+      doi: "10.1038/s41587-023-01953-y"
+      licence:
+        - "Artistic-2.0"
+input:
+  []
+output:
+  genomad_db:
+    - - "genomad_db/":
+          type: file
+          description: geNomad database directory
+authors:
+  - "@ajodeh-juma"
+maintainers:
+  - "@ajodeh-juma"

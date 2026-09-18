@@ -1,0 +1,39 @@
+name: pathogen_metrics
+description: |
+  Compute per-sample pathogen detection metrics from targeted-alignment coverage and a pathogen reference table
+keywords:
+  - "pathogen"
+  - "metrics"
+  - "coverage"
+tools:
+  - pathogen_metrics.py:
+      description: Compute per-sample pathogen detection metrics from targeted-alignment coverage and a pathogen reference table
+      homepage: https://github.com/ajodeh-juma/wwMetagen/blob/master/bin/pathogen_metrics.py
+      licence:
+        - "MIT"
+input:
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. [ id:'test', single_end:false ]
+    - coverage_txt:
+        type: file
+        description: Per-contig coverage file
+  - - pathogen_tsv:
+        type: file
+        description: TSV file listing pathogen/indicator accessions and metadata
+output:
+  metrics:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. [ id:'test', single_end:false ]
+      - "*.csv":
+          type: file
+          description: Computed metrics CSV file
+authors:
+  - "@ajodeh-juma"
+maintainers:
+  - "@ajodeh-juma"

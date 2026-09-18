@@ -1,0 +1,53 @@
+name: checkm2_predict
+description: |
+  Predict genome bin completeness and contamination with CheckM2
+keywords:
+  - "checkm2"
+  - "genome quality"
+  - "binning"
+tools:
+  - checkm2:
+      description: Rapid assessment of genome bin completeness and contamination using machine learning
+      homepage: https://github.com/chklovski/CheckM2
+      doi: "10.1038/s41592-023-01940-w"
+      licence:
+        - "BSD-3-Clause"
+input:
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. [ id:'test', single_end:false ]
+    - fasta:
+        type: file
+        description: Input FASTA sequence file
+  - - db:
+        type: file
+        description: Path to the tool/reference database directory or archive
+output:
+  checkm2_output:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. [ id:'test', single_end:false ]
+      - "${prefix}":
+          type: file
+          description: Full CheckM2 output directory
+  checkm2_tsv:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. [ id:'test', single_end:false ]
+      - "${prefix}_checkm2_report.tsv":
+          type: file
+          description: CheckM2 quality report TSV file
+  versions:
+    - - "versions.yml":
+          type: file
+          description: File containing software versions
+authors:
+  - "@ajodeh-juma"
+maintainers:
+  - "@ajodeh-juma"

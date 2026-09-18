@@ -1,0 +1,29 @@
+name: merge_mpa_reports
+description: |
+  Merge per-sample MetaPhlAn-style (MPA) abundance tables into one combined table
+keywords:
+  - "taxonomy"
+  - "mpa"
+  - "merge"
+tools:
+  - merge_mpa_tables.py:
+      description: Merge per-sample MetaPhlAn-style (MPA) abundance tables into one table
+      homepage: https://github.com/ajodeh-juma/wwMetagen/blob/master/bin/merge_mpa_tables.py
+      licence:
+        - "MIT"
+input:
+  - - mpa:
+        type: file
+        description: MetaPhlAn-style (MPA) abundance file
+  - - value:
+        type: value
+        description: "Computed value: `val (prefix)`"
+output:
+  report:
+    - - "*_merged_abundance.txt":
+          type: file
+          description: Report file
+authors:
+  - "@ajodeh-juma"
+maintainers:
+  - "@ajodeh-juma"

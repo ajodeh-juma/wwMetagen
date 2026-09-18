@@ -1,0 +1,35 @@
+name: checkm2_downloaddatabase
+description: |
+  Download the CheckM2 reference database from Zenodo
+keywords:
+  - "checkm2"
+  - "database"
+  - "genome quality"
+tools:
+  - aria2:
+      description: Lightweight multi-protocol, multi-source command-line download utility
+      homepage: https://aria2.github.io/
+      licence:
+        - "GPL-2.0-or-later"
+input:
+  - - db_zenodo_id:
+        type: value
+        description: Zenodo record ID to download the database from
+output:
+  database:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. [ id:'test', single_end:false ]
+      - "checkm2_db_v${db_version}.dmnd":
+          type: file
+          description: Path to the downloaded database archive
+  versions:
+    - - "versions.yml":
+          type: file
+          description: File containing software versions
+authors:
+  - "@ajodeh-juma"
+maintainers:
+  - "@ajodeh-juma"

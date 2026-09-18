@@ -1,0 +1,107 @@
+name: maxbin2_maxbin2
+description: |
+  Bin assembled contigs into genome bins with MaxBin2
+keywords:
+  - "binning"
+  - "maxbin2"
+  - "metagenomics"
+tools:
+  - maxbin2:
+      description: Automated binning algorithm to recover genomes from metagenomic sequences
+      homepage: https://sourceforge.net/projects/maxbin2/
+      doi: "10.1093/bioinformatics/btv638"
+      licence:
+        - "BSD-3-Clause"
+input:
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. [ id:'test', single_end:false ]
+    - contigs:
+        type: file
+        description: Assembled contig sequences in FASTA format
+    - abundance:
+        type: file
+        description: Abundance
+output:
+  binned_fastas:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. [ id:'test', single_end:false ]
+      - "*.fasta":
+          type: file
+          description: Per-bin genome FASTA file(s)
+  summary:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. [ id:'test', single_end:false ]
+      - "*.summary":
+          type: file
+          description: Summary file
+  log:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. [ id:'test', single_end:false ]
+      - "*.log":
+          type: file
+          description: Log file
+  marker_counts:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. [ id:'test', single_end:false ]
+      - "*.marker.gz":
+          type: file
+          description: Marker counts
+  unbinned_fasta:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. [ id:'test', single_end:false ]
+      - "*.noclass.gz":
+          type: file
+          description: Unbinned contig sequences
+  tooshort_fasta:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. [ id:'test', single_end:false ]
+      - "*.tooshort.gz":
+          type: file
+          description: Contigs excluded for being too short
+  marker_bins:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. [ id:'test', single_end:false ]
+      - "*_bin.tar.gz":
+          type: file
+          description: Marker gene bin archive
+  marker_genes:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. [ id:'test', single_end:false ]
+      - "*_gene.tar.gz":
+          type: file
+          description: Marker gene archive
+  versions:
+    - - "versions.yml":
+          type: file
+          description: File containing software versions
+authors:
+  - "@ajodeh-juma"
+maintainers:
+  - "@ajodeh-juma"

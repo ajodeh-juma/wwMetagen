@@ -1,0 +1,31 @@
+name: get_pathogen_reference
+description: |
+  Extract a single target reference sequence from the combined pathogen database FASTA with samtools faidx
+keywords:
+  - "reference"
+  - "samtools"
+  - "pathogen"
+tools:
+  - samtools:
+      description: Suite of programs for interacting with high-throughput sequencing data
+      homepage: http://www.htslib.org
+      documentation: http://www.htslib.org/doc/samtools.html
+      doi: "10.1093/gigascience/giab008"
+      licence:
+        - "MIT"
+input:
+  - - target_ref:
+        type: value
+        description: Identifier of the target reference sequence to extract
+  - - pathogen_db:
+        type: file
+        description: Pathogen db
+output:
+  output:
+    - - "${target_ref}.fasta":
+          type: file
+          description: ${target ref}.fasta
+authors:
+  - "@ajodeh-juma"
+maintainers:
+  - "@ajodeh-juma"

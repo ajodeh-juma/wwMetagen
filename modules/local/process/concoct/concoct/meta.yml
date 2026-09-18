@@ -1,0 +1,101 @@
+name: concoct_concoct
+description: |
+  Cluster contigs into genome bins using coverage and composition with CONCOCT
+keywords:
+  - "binning"
+  - "concoct"
+  - "metagenomics"
+tools:
+  - concoct:
+      description: Clustering cONtigs with COverage and ComposiTion for metagenomic binning
+      homepage: https://github.com/BinPro/CONCOCT
+      doi: "10.1038/nmeth.3103"
+      licence:
+        - "BSD-3-Clause"
+input:
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. [ id:'test', single_end:false ]
+    - contigs:
+        type: file
+        description: Assembled contig sequences in FASTA format
+    - coverage_file:
+        type: file
+        description: Per-contig coverage file
+  - - min_contig_len:
+        type: value
+        description: Minimum contig length threshold
+output:
+  args_txt:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. [ id:'test', single_end:false ]
+      - "*_args.txt":
+          type: file
+          description: CONCOCT run arguments file
+  csv:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. [ id:'test', single_end:false ]
+      - "*.csv":
+          type: file
+          description: CSV file
+  clustering_csv:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. [ id:'test', single_end:false ]
+      - "*_clustering_gt${min_contig_len}.csv":
+          type: file
+          description: CONCOCT clustering assignment CSV file
+  log_txt:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. [ id:'test', single_end:false ]
+      - "*_log.txt":
+          type: file
+          description: CONCOCT run log file
+  original_data_csv:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. [ id:'test', single_end:false ]
+      - "*_original_data_gt${min_contig_len}.csv":
+          type: file
+          description: CONCOCT original composition/coverage data CSV file
+  pca_components_csv:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. [ id:'test', single_end:false ]
+      - "*_PCA_components_data_gt${min_contig_len}.csv":
+          type: file
+          description: CONCOCT PCA components CSV file
+  pca_transformed_csv:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. [ id:'test', single_end:false ]
+      - "*_PCA_transformed_data_gt${min_contig_len}.csv":
+          type: file
+          description: CONCOCT PCA-transformed data CSV file
+  versions:
+    - - "versions.yml":
+          type: file
+          description: File containing software versions
+authors:
+  - "@ajodeh-juma"
+maintainers:
+  - "@ajodeh-juma"

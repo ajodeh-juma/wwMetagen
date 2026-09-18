@@ -1,0 +1,132 @@
+name: gtdbtk_classifywf
+description: |
+  Assign taxonomic classifications to genome bins against the GTDB with GTDB-Tk classify_wf
+keywords:
+  - "taxonomy"
+  - "gtdbtk"
+  - "binning"
+tools:
+  - gtdbtk:
+      description: Toolkit for assigning objective taxonomic classifications to bacterial and archaeal genomes based on the Genome Taxonomy Database (GTDB)
+      homepage: https://github.com/Ecogenomics/GTDBTk
+      documentation: https://ecogenomics.github.io/GTDBTk/
+      doi: "10.1093/bioinformatics/btz848"
+      licence:
+        - "GPL-3.0-only"
+input:
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. [ id:'test', single_end:false ]
+    - "bins/*":
+        type: file
+        description: Bins/*
+  - - db_name:
+        type: value
+        description: Db name
+    - db:
+        type: file
+        description: Path to the tool/reference database directory or archive
+  - - mash_db:
+        type: file
+        description: Optional Mash ANI screening database used to speed up GTDB-Tk classification
+output:
+  gtdb_outdir:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. [ id:'test', single_end:false ]
+      - "${prefix}":
+          type: file
+          description: Full GTDB-Tk output directory
+  summary:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. [ id:'test', single_end:false ]
+      - "${prefix}/classify/*.summary.tsv":
+          type: file
+          description: Summary file
+  tree:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. [ id:'test', single_end:false ]
+      - "${prefix}/classify/*.classify.tree":
+          type: file
+          description: Classification tree file
+  markers:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. [ id:'test', single_end:false ]
+      - "${prefix}/identify/*.markers_summary.tsv":
+          type: file
+          description: Marker gene summary file
+  msa:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. [ id:'test', single_end:false ]
+      - "${prefix}/align/*.msa.fasta.gz":
+          type: file
+          description: Multiple sequence alignment (MSA) FASTA file
+  user_msa:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. [ id:'test', single_end:false ]
+      - "${prefix}/align/*.user_msa.fasta.gz":
+          type: file
+          description: User-genome multiple sequence alignment (MSA) FASTA file
+  filtered:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. [ id:'test', single_end:false ]
+      - "${prefix}/align/*.filtered.tsv":
+          type: file
+          description: Filtered alignment TSV file
+  failed:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. [ id:'test', single_end:false ]
+      - "${prefix}/identify/*.failed_genomes.tsv":
+          type: file
+          description: Failed-genome report TSV file
+  log:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. [ id:'test', single_end:false ]
+      - "${prefix}/${prefix}.log":
+          type: file
+          description: Log file
+  warnings:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. [ id:'test', single_end:false ]
+      - "${prefix}/${prefix}.warnings.log":
+          type: file
+          description: Warnings log file
+  versions:
+    - - "versions.yml":
+          type: file
+          description: File containing software versions
+authors:
+  - "@ajodeh-juma"
+maintainers:
+  - "@ajodeh-juma"

@@ -1,0 +1,40 @@
+name: concoct_extractfastabins
+description: |
+  Extract per-bin FASTA files from a CONCOCT clustering result
+keywords:
+  - "binning"
+  - "concoct"
+  - "metagenomics"
+tools:
+  - concoct:
+      description: Clustering cONtigs with COverage and ComposiTion for metagenomic binning
+      homepage: https://github.com/BinPro/CONCOCT
+      doi: "10.1038/nmeth.3103"
+      licence:
+        - "BSD-3-Clause"
+input:
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. [ id:'test', single_end:false ]
+    - original_fasta:
+        type: file
+        description: Original fasta
+    - csv:
+        type: file
+        description: CSV file
+output:
+  fasta:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. [ id:'test', single_end:false ]
+      - "${prefix}/*.fa.gz":
+          type: file
+          description: Input FASTA sequence file
+authors:
+  - "@ajodeh-juma"
+maintainers:
+  - "@ajodeh-juma"

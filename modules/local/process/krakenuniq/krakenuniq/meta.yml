@@ -1,0 +1,53 @@
+name: krakenuniq_krakenuniq
+description: |
+  Assign taxonomic classifications to reads with unique k-mer counting using KrakenUniq
+keywords:
+  - "taxonomy"
+  - "krakenuniq"
+  - "classification"
+tools:
+  - krakenuniq:
+      description: Confident and fast metagenomics classification using unique k-mer counts
+      homepage: https://github.com/fbreitwieser/krakenuniq
+      doi: "10.1186/s13059-018-1568-0"
+      licence:
+        - "GPL-3.0-only"
+input:
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. [ id:'test', single_end:false ]
+    - reads:
+        type: file
+        description: List of input FASTQ files
+  - - db:
+        type: file
+        description: Path to the tool/reference database directory or archive
+output:
+  report:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. [ id:'test', single_end:false ]
+      - "${prefix}.krakenuniq.report.tsv":
+          type: file
+          description: Report file
+  raw_output:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. [ id:'test', single_end:false ]
+      - "${prefix}.krakenuniq.output.txt":
+          type: file
+          description: Per-read classification output
+  versions:
+    - - "versions.yml":
+          type: file
+          description: File containing software versions
+authors:
+  - "@ajodeh-juma"
+maintainers:
+  - "@ajodeh-juma"

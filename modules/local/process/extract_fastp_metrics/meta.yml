@@ -1,0 +1,31 @@
+name: extract_fastp_metrics
+description: |
+  Extract read QC metrics from a fastp JSON report
+keywords:
+  - "qc"
+  - "fastp"
+  - "metrics"
+tools:
+  - fastp_to_tsv.py:
+      description: Extract read QC metrics from a fastp JSON report into a TSV summary
+      homepage: https://github.com/ajodeh-juma/wwMetagen/blob/master/bin/fastp_to_tsv.py
+      licence:
+        - "MIT"
+input:
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. [ id:'test', single_end:false ]
+    - json:
+        type: file
+        description: JSON file
+output:
+  tsv:
+    - - "*_summary.tsv":
+          type: file
+          description: TSV file
+authors:
+  - "@ajodeh-juma"
+maintainers:
+  - "@ajodeh-juma"

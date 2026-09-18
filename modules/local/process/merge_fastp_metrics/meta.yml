@@ -1,0 +1,20 @@
+name: merge_fastp_metrics
+description: |
+  Merge per-sample fastp QC metrics TSVs into one table
+keywords:
+  - "qc"
+  - "fastp"
+  - "merge"
+input:
+  - - tsv_files:
+        type: file
+        description: TSV file(s)
+output:
+  combined_tsv:
+    - - "fastp_summary.tsv":
+          type: file
+          description: Combined/merged TSV file
+authors:
+  - "@ajodeh-juma"
+maintainers:
+  - "@ajodeh-juma"

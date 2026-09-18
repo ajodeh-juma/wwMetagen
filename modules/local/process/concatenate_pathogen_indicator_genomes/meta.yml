@@ -1,0 +1,42 @@
+name: concatenate_pathogen_indicator_genomes
+description: |
+  Concatenate per-genome pathogen/indicator reference FASTAs and metadata TSVs into one combined reference set
+keywords:
+  - "reference"
+  - "pathogen"
+  - "concatenate"
+input:
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. [ id:'test', single_end:false ]
+    - fastas:
+        type: file
+        description: Fastas
+    - metas:
+        type: file
+        description: Metadata file(s)
+output:
+  fasta:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. [ id:'test', single_end:false ]
+      - "${meta.id}_ref.fasta":
+          type: file
+          description: Input FASTA sequence file
+  metadata:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. [ id:'test', single_end:false ]
+      - "${meta.id}_metadata.tsv":
+          type: file
+          description: Metadata file
+authors:
+  - "@ajodeh-juma"
+maintainers:
+  - "@ajodeh-juma"

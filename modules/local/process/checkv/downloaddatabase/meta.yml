@@ -1,0 +1,29 @@
+name: checkv_downloaddatabase
+description: |
+  Download the CheckV reference database
+keywords:
+  - "checkv"
+  - "database"
+  - "virus quality"
+tools:
+  - checkv:
+      description: Assessing the quality of metagenome-assembled viral genomes
+      homepage: https://bitbucket.org/berkeleylab/checkv
+      doi: "10.1038/s41587-020-00774-7"
+      licence:
+        - "BSD-3-Clause-LBNL"
+input:
+  []
+output:
+  checkv_db:
+    - - "${prefix}/*":
+          type: file
+          description: CheckV database files
+  versions:
+    - - "versions.yml":
+          type: file
+          description: File containing software versions
+authors:
+  - "@ajodeh-juma"
+maintainers:
+  - "@ajodeh-juma"

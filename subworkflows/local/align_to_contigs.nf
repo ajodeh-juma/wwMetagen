@@ -1,9 +1,9 @@
 
-include { MINIMAP2_INDEX } from '../../modules/local/process/minimap2_index'
-include { MINIMAP2_ALIGN } from '../../modules/local/process/minimap2_align_contigs'
-include { SAMTOOLS_SORT  } from '../../modules/local/process/samtools_sort'
-include { SAMTOOLS_INDEX } from '../../modules/local/process/samtools_index'
-include { COVERM_CONTIG  } from '../../modules/local/process/coverm_contig'
+include { MINIMAP2_INDEX } from '../../modules/local/process/minimap2/index/main'
+include { MINIMAP2_ALIGN } from '../../modules/local/process/minimap2/aligncontigs/main'
+include { SAMTOOLS_SORT  } from '../../modules/local/process/samtools/sort/main'
+include { SAMTOOLS_INDEX } from '../../modules/local/process/samtools/index/main'
+include { COVERM_CONTIG  } from '../../modules/local/process/coverm/contig/main'
 
 
 workflow ALIGN_TO_CONTIGS {

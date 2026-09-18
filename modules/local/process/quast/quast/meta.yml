@@ -1,0 +1,50 @@
+name: quast_quast
+description: |
+  Assess assembly quality with MetaQUAST
+keywords:
+  - "assembly"
+  - "quast"
+  - "qc"
+tools:
+  - quast:
+      description: Quality Assessment Tool for Genome Assemblies, run here in MetaQUAST (metagenome) mode
+      homepage: http://quast.sourceforge.net
+      doi: "10.1093/bioinformatics/btw379"
+      licence:
+        - "GPL-2.0-only"
+input:
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. [ id:'test', single_end:false ]
+    - assembly:
+        type: file
+        description: Assembly
+output:
+  results:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. [ id:'test', single_end:false ]
+      - "${prefix}":
+          type: file
+          description: Full tool results directory
+  tsv:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. [ id:'test', single_end:false ]
+      - "${prefix}.tsv":
+          type: file
+          description: TSV file
+  versions:
+    - - "versions.yml":
+          type: file
+          description: File containing software versions
+authors:
+  - "@ajodeh-juma"
+maintainers:
+  - "@ajodeh-juma"

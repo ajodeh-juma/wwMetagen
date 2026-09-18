@@ -7,11 +7,11 @@
 include { HOSTILE_FETCH            } from '../modules/nf-core/hostile/fetch/main'
 include { FASTQC                   } from '../modules/nf-core/fastqc/main'
 include { FASTP                    } from '../modules/nf-core/fastp/main'
-include { EXTRACT_FASTP_METRICS    } from '../modules/local/process/extract_fastp_metrics'
-include { MERGE_FASTP_METRICS      } from '../modules/local/process/merge_fastp_metrics'
+include { EXTRACT_FASTP_METRICS    } from '../modules/local/process/extract_fastp_metrics/main'
+include { MERGE_FASTP_METRICS      } from '../modules/local/process/merge_fastp_metrics/main'
 include { HOSTILE_CLEAN            } from '../modules/nf-core/hostile/clean/main'
-include { EXTRACT_HOSTILE_METRICS  } from '../modules/local/process/extract_hostile_metrics'
-include { MERGE_HOSTILE_METRICS    } from '../modules/local/process/merge_hostile_metrics'
+include { EXTRACT_HOSTILE_METRICS  } from '../modules/local/process/extract_hostile_metrics/main'
+include { MERGE_HOSTILE_METRICS    } from '../modules/local/process/merge_hostile_metrics/main'
 
 
 include { MULTIQC                } from '../modules/nf-core/multiqc/main'
@@ -27,7 +27,7 @@ include { methodsDescriptionText } from '../subworkflows/local/utils_nfcore_wwme
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
-include { BAKTA_AMRFINDER_UPDATE }     from '../modules/local/process/bakta_amrfinder_update'
+include { BAKTA_AMRFINDER_UPDATE }     from '../modules/local/process/bakta/amrfinderupdate/main'
 include { BAKTA_BAKTADBDOWNLOAD  }     from '../modules/local/process/bakta/baktadbdownload/main'
 
 include { TARGETED_ALIGNMENT     }    from '../subworkflows/local/targeted_alignment'

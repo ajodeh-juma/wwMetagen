@@ -4,19 +4,19 @@
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
-include { KRAKEN2_KRAKEN2          } from '../../modules/local/process/kraken2_kraken2'
-include { BRACKEN_BRACKEN          } from '../../modules/local/process/bracken_bracken'
-include { KRAKENTOOLS_KREPORT2MPA as KRAKENTOOLS_KREPORT2MPA_KRAKEN2  } from '../../modules/local/process/krakentools_kreport2mpa'
-include { KRAKENTOOLS_KREPORT2MPA as KRAKENTOOLS_KREPORT2MPA_BRACKEN  } from '../../modules/local/process/krakentools_kreport2mpa'
-include { MERGE_MPA_REPORTS as MERGE_MPA_REPORTS_KRAKEN2              } from '../../modules/local/process/merge_mpa_reports'
-include { MERGE_MPA_REPORTS as MERGE_MPA_REPORTS_BRACKEN              } from '../../modules/local/process/merge_mpa_reports'
-include { EXTRACT_DOMAIN_METRICS as EXTRACT_DOMAIN_METRICS_KRAKEN2    } from '../../modules/local/process/extract_domain_metrics'
-include { EXTRACT_DOMAIN_METRICS as EXTRACT_DOMAIN_METRICS_BRACKEN    } from '../../modules/local/process/extract_domain_metrics'
-include { MERGE_DOMAIN_METRICS as MERGE_DOMAIN_METRICS_KRAKEN2        } from '../../modules/local/process/merge_domain_metrics'
-include { MERGE_DOMAIN_METRICS as MERGE_DOMAIN_METRICS_BRACKEN        } from '../../modules/local/process/merge_domain_metrics'
-include { NORMALIZE_ABUNDANCES as NORMALIZE_ABUNDANCES_KRAKEN2        } from '../../modules/local/process/normalize_abundances'
-include { NORMALIZE_ABUNDANCES as NORMALIZE_ABUNDANCES_BRACKEN        } from '../../modules/local/process/normalize_abundances'
-include { KRAKENUNIQ               } from '../../modules/local/process/krakenuniq'
+include { KRAKEN2_KRAKEN2          } from '../../modules/local/process/kraken2/kraken2/main'
+include { BRACKEN_BRACKEN          } from '../../modules/local/process/bracken/bracken/main'
+include { KRAKENTOOLS_KREPORT2MPA as KRAKENTOOLS_KREPORT2MPA_KRAKEN2  } from '../../modules/local/process/krakentools/kreport2mpa/main'
+include { KRAKENTOOLS_KREPORT2MPA as KRAKENTOOLS_KREPORT2MPA_BRACKEN  } from '../../modules/local/process/krakentools/kreport2mpa/main'
+include { MERGE_MPA_REPORTS as MERGE_MPA_REPORTS_KRAKEN2              } from '../../modules/local/process/merge_mpa_reports/main'
+include { MERGE_MPA_REPORTS as MERGE_MPA_REPORTS_BRACKEN              } from '../../modules/local/process/merge_mpa_reports/main'
+include { EXTRACT_DOMAIN_METRICS as EXTRACT_DOMAIN_METRICS_KRAKEN2    } from '../../modules/local/process/extract_domain_metrics/main'
+include { EXTRACT_DOMAIN_METRICS as EXTRACT_DOMAIN_METRICS_BRACKEN    } from '../../modules/local/process/extract_domain_metrics/main'
+include { MERGE_DOMAIN_METRICS as MERGE_DOMAIN_METRICS_KRAKEN2        } from '../../modules/local/process/merge_domain_metrics/main'
+include { MERGE_DOMAIN_METRICS as MERGE_DOMAIN_METRICS_BRACKEN        } from '../../modules/local/process/merge_domain_metrics/main'
+include { NORMALIZE_ABUNDANCES as NORMALIZE_ABUNDANCES_KRAKEN2        } from '../../modules/local/process/normalize_abundances/main'
+include { NORMALIZE_ABUNDANCES as NORMALIZE_ABUNDANCES_BRACKEN        } from '../../modules/local/process/normalize_abundances/main'
+include { KRAKENUNIQ               } from '../../modules/local/process/krakenuniq/krakenuniq/main'
 
 workflow TAXONOMIC_PROFILING {
     take:

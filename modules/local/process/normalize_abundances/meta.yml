@@ -1,0 +1,32 @@
+name: normalize_abundances
+description: |
+  Normalize a merged MPA abundance table to reads-per-million using domain read totals
+keywords:
+  - "taxonomy"
+  - "normalization"
+  - "abundance"
+tools:
+  - compute_mpa_relative_abundance.py:
+      description: Normalize a merged MPA abundance table to reads-per-million using domain read totals
+      homepage: https://github.com/ajodeh-juma/wwMetagen/blob/master/bin/compute_mpa_relative_abundance.py
+      licence:
+        - "MIT"
+input:
+  - - merged_mpa:
+        type: file
+        description: Merged mpa
+  - - merged_domain_metrics:
+        type: file
+        description: Merged domain metrics
+  - - type:
+        type: value
+        description: Label identifying the classification method ('kraken2' or 'bracken')
+output:
+  normalized_mpa:
+    - - "*_normalized_rpm.mpa.txt":
+          type: file
+          description: Normalized (reads-per-million) MPA abundance file
+authors:
+  - "@ajodeh-juma"
+maintainers:
+  - "@ajodeh-juma"

@@ -1,0 +1,29 @@
+name: bakta_amrfinderupdate
+description: |
+  Refresh the AMRFinderPlus database bundled inside a Bakta database directory
+keywords:
+  - "amr"
+  - "bakta"
+  - "amrfinderplus"
+  - "database"
+tools:
+  - amrfinderplus:
+      description: Identify antimicrobial resistance genes, point mutations and virulence factors
+      homepage: https://github.com/ncbi/amr
+      documentation: https://github.com/ncbi/amr/wiki
+      doi: "10.1038/s41598-021-91456-0"
+      licence:
+        - "Public Domain"
+input:
+  - - db:
+        type: file
+        description: Path to the tool/reference database directory or archive
+output:
+  db:
+    - - db:
+          type: file
+          description: Path to the tool/reference database directory or archive
+authors:
+  - "@ajodeh-juma"
+maintainers:
+  - "@ajodeh-juma"

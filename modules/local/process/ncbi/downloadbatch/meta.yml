@@ -1,0 +1,39 @@
+name: ncbi_downloadbatch
+description: |
+  Resolve and download reference assemblies for a batch of NCBI Taxonomy IDs with the NCBI Datasets CLI
+keywords:
+  - "ncbi"
+  - "datasets"
+  - "reference"
+  - "download"
+tools:
+  - datasets:
+      description: NCBI Datasets command-line tool to download genome, gene and taxonomic data
+      homepage: https://www.ncbi.nlm.nih.gov/datasets/
+      documentation: https://www.ncbi.nlm.nih.gov/datasets/docs/v2/
+      licence:
+        - "Public Domain"
+input:
+  - - taxon_input:
+        type: file
+        description: Tab-delimited file listing NCBI Taxonomy IDs in the first column
+  - - max_attempts:
+        type: value
+        description: Maximum number of rehydration retry attempts
+output:
+  genome:
+    - - "*.fasta":
+          type: file
+          description: Downloaded genome FASTA file
+  metadata:
+    - - "metadata.tsv":
+          type: file
+          description: Metadata file
+  versions:
+    - - "versions.yml":
+          type: file
+          description: File containing software versions
+authors:
+  - "@ajodeh-juma"
+maintainers:
+  - "@ajodeh-juma"

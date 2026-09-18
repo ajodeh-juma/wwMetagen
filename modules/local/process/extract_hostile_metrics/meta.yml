@@ -1,0 +1,30 @@
+name: extract_hostile_metrics
+description: |
+  Extract host-read-removal metrics from a Hostile JSON report
+keywords:
+  - "host removal"
+  - "hostile"
+  - "metrics"
+input:
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. [ id:'test', single_end:false ]
+    - hostile_json:
+        type: file
+        description: Hostile json
+output:
+  tsv:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. [ id:'test', single_end:false ]
+      - "*_hostile_metrics.tsv":
+          type: file
+          description: TSV file
+authors:
+  - "@ajodeh-juma"
+maintainers:
+  - "@ajodeh-juma"

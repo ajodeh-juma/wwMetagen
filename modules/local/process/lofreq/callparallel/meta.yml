@@ -1,0 +1,63 @@
+name: lofreq_callparallel
+description: |
+  Call low-frequency variants from an alignment in parallel with LoFreq
+keywords:
+  - "variant calling"
+  - "lofreq"
+tools:
+  - lofreq:
+      description: Sensitive variant calling from next-generation sequencing data
+      homepage: https://csb5.github.io/lofreq/
+      doi: "10.1093/nar/gks918"
+      licence:
+        - "MIT"
+input:
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. [ id:'test', single_end:false ]
+    - bam:
+        type: file
+        description: BAM alignment file
+    - bai:
+        type: file
+        description: BAM index file
+  - - meta2:
+        type: map
+        description: |
+          Groovy Map containing reference/secondary sample information
+          e.g. [ id:'test' ]
+    - fasta:
+        type: file
+        description: Input FASTA sequence file
+    - fai:
+        type: file
+        description: FASTA index (.fai) file
+output:
+  vcf:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. [ id:'test', single_end:false ]
+      - "*.vcf.gz":
+          type: file
+          description: VCF file
+  tbi:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. [ id:'test', single_end:false ]
+      - "*.vcf.gz.tbi":
+          type: file
+          description: Tabix index of the VCF file
+  versions:
+    - - "versions.yml":
+          type: file
+          description: File containing software versions
+authors:
+  - "@ajodeh-juma"
+maintainers:
+  - "@ajodeh-juma"

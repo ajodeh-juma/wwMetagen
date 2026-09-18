@@ -1,0 +1,36 @@
+name: extract_domain_metrics
+description: |
+  Extract classified/unclassified read counts per taxonomic domain from a Kraken2/Bracken report
+keywords:
+  - "taxonomy"
+  - "metrics"
+  - "kraken2"
+tools:
+  - extract_domain_metrics.py:
+      description: Extract classified/unclassified read counts for taxonomic domains from a Kraken2/Bracken report
+      homepage: https://github.com/ajodeh-juma/wwMetagen/blob/master/bin/extract_domain_metrics.py
+      licence:
+        - "MIT"
+input:
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. [ id:'test', single_end:false ]
+    - report:
+        type: file
+        description: Report file
+output:
+  tsv:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. [ id:'test', single_end:false ]
+      - "*.tsv":
+          type: file
+          description: TSV file
+authors:
+  - "@ajodeh-juma"
+maintainers:
+  - "@ajodeh-juma"

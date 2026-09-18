@@ -1,0 +1,65 @@
+name: amrfinderplus_run
+description: |
+  Screen protein or nucleotide sequences for antimicrobial resistance genes and point mutations with AMRFinderPlus, with organism auto-detection
+keywords:
+  - "amr"
+  - "amrfinderplus"
+  - "virulence"
+tools:
+  - amrfinderplus:
+      description: Identify antimicrobial resistance genes, point mutations and virulence factors
+      homepage: https://github.com/ncbi/amr
+      documentation: https://github.com/ncbi/amr/wiki
+      doi: "10.1038/s41598-021-91456-0"
+      licence:
+        - "Public Domain"
+input:
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. [ id:'test', single_end:false ]
+    - fasta:
+        type: file
+        description: Input FASTA sequence file
+  - - db:
+        type: file
+        description: Path to the tool/reference database directory or archive
+  - - organisms:
+        type: value
+        description: Comma-separated list of organisms allowed for AMRFinderPlus --organism matching
+output:
+  report:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. [ id:'test', single_end:false ]
+      - "${prefix}.tsv":
+          type: file
+          description: Report file
+  mutation_report:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. [ id:'test', single_end:false ]
+      - "${prefix}-mutations.tsv":
+          type: file
+          description: AMRFinderPlus point-mutation report TSV file
+  tool_version:
+    - - VER:
+          type: string
+          description: Value captured from the `VER` environment variable
+  db_version:
+    - - DBVER:
+          type: string
+          description: Value captured from the `DBVER` environment variable
+  versions:
+    - - "versions.yml":
+          type: file
+          description: File containing software versions
+authors:
+  - "@ajodeh-juma"
+maintainers:
+  - "@ajodeh-juma"

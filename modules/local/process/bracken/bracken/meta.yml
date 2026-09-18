@@ -1,0 +1,54 @@
+name: bracken_bracken
+description: |
+  Re-estimate taxonomic abundance at a given rank from a Kraken2 report
+keywords:
+  - "taxonomy"
+  - "abundance"
+  - "bracken"
+  - "kraken2"
+tools:
+  - bracken:
+      description: Bayesian Reestimation of Abundance after classification with Kraken
+      homepage: https://github.com/jenniferlu717/Bracken
+      doi: "10.7717/peerj-cs.104"
+      licence:
+        - "GPL-3.0-only"
+input:
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. [ id:'test', single_end:false ]
+    - kraken_report:
+        type: file
+        description: Kraken2-format classification report
+  - - db:
+        type: file
+        description: Path to the tool/reference database directory or archive
+output:
+  report:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. [ id:'test', single_end:false ]
+      - "*.tsv":
+          type: file
+          description: Report file
+  tax_level_report:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. [ id:'test', single_end:false ]
+      - "*.txt":
+          type: file
+          description: Bracken taxonomic-level report
+  versions:
+    - - "versions.yml":
+          type: file
+          description: File containing software versions
+authors:
+  - "@ajodeh-juma"
+maintainers:
+  - "@ajodeh-juma"

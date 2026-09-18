@@ -1,0 +1,40 @@
+name: krakentools_kreport2mpa
+description: |
+  Convert a Kraken2/Bracken report into MetaPhlAn-style (MPA) format with KrakenTools
+keywords:
+  - "taxonomy"
+  - "krakentools"
+  - "mpa"
+tools:
+  - krakentools:
+      description: Scripts for post-processing Kraken/Kraken2/Bracken results (kreport2mpa.py converts a report to MetaPhlAn-style MPA format)
+      homepage: https://github.com/jenniferlu717/KrakenTools
+      licence:
+        - "GPL-3.0-only"
+input:
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. [ id:'test', single_end:false ]
+    - report:
+        type: file
+        description: Report file
+output:
+  mpa:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. [ id:'test', single_end:false ]
+      - "*.mpa":
+          type: file
+          description: MetaPhlAn-style (MPA) abundance file
+  versions:
+    - - "versions.yml":
+          type: file
+          description: File containing software versions
+authors:
+  - "@ajodeh-juma"
+maintainers:
+  - "@ajodeh-juma"

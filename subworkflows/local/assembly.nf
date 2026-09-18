@@ -4,8 +4,8 @@
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
-include { MEGAHIT                }     from '../../modules/local/process/megahit'
-include { QUAST                  }     from '../../modules/local/process/quast'
+include { MEGAHIT                }     from '../../modules/local/process/megahit/megahit/main'
+include { QUAST                  }     from '../../modules/local/process/quast/quast/main'
 include { ALIGN_TO_CONTIGS       }     from '../local/align_to_contigs'
 include { BINNING_REFINEMENT     }     from '../local/binning_refinement'
 include { BINNING_ANALYSIS       }     from '../local/binning_analysis'

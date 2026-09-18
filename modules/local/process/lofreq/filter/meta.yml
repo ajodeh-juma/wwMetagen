@@ -1,0 +1,41 @@
+name: lofreq_filter
+description: |
+  Filter a LoFreq VCF file
+keywords:
+  - "variant calling"
+  - "lofreq"
+  - "filtering"
+tools:
+  - lofreq:
+      description: Sensitive variant calling from next-generation sequencing data
+      homepage: https://csb5.github.io/lofreq/
+      doi: "10.1093/nar/gks918"
+      licence:
+        - "MIT"
+input:
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. [ id:'test', single_end:false ]
+    - vcf:
+        type: file
+        description: VCF file
+output:
+  vcf:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. [ id:'test', single_end:false ]
+      - "*_filtered.vcf":
+          type: file
+          description: VCF file
+  versions:
+    - - "versions.yml":
+          type: file
+          description: File containing software versions
+authors:
+  - "@ajodeh-juma"
+maintainers:
+  - "@ajodeh-juma"

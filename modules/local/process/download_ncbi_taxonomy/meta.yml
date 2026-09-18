@@ -1,0 +1,20 @@
+name: download_ncbi_taxonomy
+description: |
+  Download the NCBI taxonomy dump archive from a given URL
+keywords:
+  - "taxonomy"
+  - "ncbi"
+  - "download"
+input:
+  - - taxonomy_url:
+        type: value
+        description: URL of the NCBI taxonomy archive to download
+output:
+  tax_zip:
+    - - "taxonomy.zip":
+          type: file
+          description: NCBI taxonomy archive
+authors:
+  - "@ajodeh-juma"
+maintainers:
+  - "@ajodeh-juma"

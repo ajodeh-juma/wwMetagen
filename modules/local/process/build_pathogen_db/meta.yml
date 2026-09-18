@@ -1,0 +1,31 @@
+name: build_pathogen_db
+description: |
+  Build a combined pathogen reference FASTA by fetching accessions listed in a pathogen TSV with NCBI EDirect
+keywords:
+  - "reference"
+  - "database"
+  - "entrez-direct"
+  - "pathogen"
+tools:
+  - entrez-direct:
+      description: NCBI Entrez Direct UNIX command-line tools for the NCBI Entrez databases
+      homepage: https://www.ncbi.nlm.nih.gov/books/NBK179288/
+      licence:
+        - "Public Domain"
+input:
+  - - pathogen_tsv:
+        type: file
+        description: TSV file listing pathogen/indicator accessions and metadata
+output:
+  fasta:
+    - - "*.fasta":
+          type: file
+          description: Input FASTA sequence file
+  versions:
+    - - "versions.yml":
+          type: file
+          description: File containing software versions
+authors:
+  - "@ajodeh-juma"
+maintainers:
+  - "@ajodeh-juma"

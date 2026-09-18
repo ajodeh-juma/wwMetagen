@@ -1,0 +1,31 @@
+name: gtdbtk_dbpreparation
+description: |
+  Unpack a downloaded GTDB-Tk reference database archive
+keywords:
+  - "taxonomy"
+  - "gtdbtk"
+  - "database"
+tools:
+  - gtdbtk:
+      description: Toolkit for assigning objective taxonomic classifications to bacterial and archaeal genomes based on the Genome Taxonomy Database (GTDB)
+      homepage: https://github.com/Ecogenomics/GTDBTk
+      documentation: https://ecogenomics.github.io/GTDBTk/
+      doi: "10.1093/bioinformatics/btz848"
+      licence:
+        - "GPL-3.0-only"
+input:
+  - - database:
+        type: file
+        description: Path to the downloaded database archive
+output:
+  db:
+    - - db:
+          type: value
+          description: "Computed value: `val(\"${database.toString().replace(\".tar.gz\", \"\")}\")`"
+      - "database/*":
+          type: file
+          description: Path to the tool/reference database directory or archive
+authors:
+  - "@ajodeh-juma"
+maintainers:
+  - "@ajodeh-juma"

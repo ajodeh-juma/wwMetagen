@@ -1,0 +1,63 @@
+name: kraken2_kraken2
+description: |
+  Assign taxonomic classifications to reads with Kraken2
+keywords:
+  - "taxonomy"
+  - "kraken2"
+  - "classification"
+tools:
+  - kraken2:
+      description: Taxonomic classification system using exact k-mer matches
+      homepage: https://github.com/DerrickWood/kraken2
+      documentation: https://github.com/DerrickWood/kraken2/wiki
+      doi: "10.1186/s13059-019-1891-0"
+      licence:
+        - "MIT"
+input:
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. [ id:'test', single_end:false ]
+    - reads:
+        type: file
+        description: List of input FASTQ files
+  - - db:
+        type: file
+        description: Path to the tool/reference database directory or archive
+output:
+  classified:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. [ id:'test', single_end:false ]
+      - "*.classified.fastq.gz":
+          type: file
+          description: Reads classified by Kraken2
+  unclassified:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. [ id:'test', single_end:false ]
+      - "*.unclassified.fastq.gz":
+          type: file
+          description: Reads not classified by Kraken2
+  report:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. [ id:'test', single_end:false ]
+      - "*report.txt":
+          type: file
+          description: Report file
+  versions:
+    - - "versions.yml":
+          type: file
+          description: File containing software versions
+authors:
+  - "@ajodeh-juma"
+maintainers:
+  - "@ajodeh-juma"

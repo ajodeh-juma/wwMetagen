@@ -3,14 +3,14 @@
     SUBWORKFLOW: BINNING_ANALYSIS
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
-include { CHECKM2_DOWNLOADDATABASE     } from '../../modules/local/process/checkm2_downloaddatabase'
-include { CHECKM2_PREDICT              } from '../../modules/local/process/checkm2_predict'
-include { GTDBTK_DB_PREPARATION        } from '../../modules/local/process/gtdbtk_db_preparation'
-include { GTDBTK_CLASSIFYWF            } from '../../modules/local/process/gtdbtk_classifywf'
-include { GENOMAD_DOWNLOADDATABASE     } from '../../modules/local/process/genomad_downloaddatabase'
-include { GENOMAD_ENDTOEND             } from '../../modules/local/process/genomad_endtoend'
-include { CHECKV_DOWNLOADDATABASE      } from '../../modules/local/process/checkv_downloaddatabase'
-include { CHECKV_ENDTOEND              } from '../../modules/local/process/checkv_endtoend'
+include { CHECKM2_DOWNLOADDATABASE     } from '../../modules/local/process/checkm2/downloaddatabase/main'
+include { CHECKM2_PREDICT              } from '../../modules/local/process/checkm2/predict/main'
+include { GTDBTK_DB_PREPARATION        } from '../../modules/local/process/gtdbtk/dbpreparation/main'
+include { GTDBTK_CLASSIFYWF            } from '../../modules/local/process/gtdbtk/classifywf/main'
+include { GENOMAD_DOWNLOADDATABASE     } from '../../modules/local/process/genomad/downloaddatabase/main'
+include { GENOMAD_ENDTOEND             } from '../../modules/local/process/genomad/endtoend/main'
+include { CHECKV_DOWNLOADDATABASE      } from '../../modules/local/process/checkv/downloaddatabase/main'
+include { CHECKV_ENDTOEND              } from '../../modules/local/process/checkv/endtoend/main'
 
 workflow BINNING_ANALYSIS {
     take:

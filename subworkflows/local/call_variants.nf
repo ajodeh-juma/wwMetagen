@@ -1,7 +1,7 @@
-include { NCBI_DOWNLOAD_SINGLE as NCBI_DOWNLOAD_PATHOGEN     } from '../../modules/local/process/ncbi_download_single'
-include { MINIMAP2_INDEX as MINIMAP2_INDEX_TARGET       } from '../../modules/local/process/minimap2_index'
-include { MINIMAP2_ALIGN as MINIMAP2_ALIGN_TARGET       } from '../../modules/local/process/minimap2_align'
-include { SAMTOOLS_FAIDX   } from '../../modules/local/process/samtools_faidx'
+include { NCBI_DOWNLOAD_SINGLE as NCBI_DOWNLOAD_PATHOGEN     } from '../../modules/local/process/ncbi/downloadsingle/main'
+include { MINIMAP2_INDEX as MINIMAP2_INDEX_TARGET       } from '../../modules/local/process/minimap2/index/main'
+include { MINIMAP2_ALIGN as MINIMAP2_ALIGN_TARGET       } from '../../modules/local/process/minimap2/align/main'
+include { SAMTOOLS_FAIDX   } from '../../modules/local/process/samtools/faidx/main'
 include { LOFREQ_INDELQUAL } from '../../modules/nf-core/lofreq/indelqual'
 
 

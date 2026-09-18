@@ -1,0 +1,29 @@
+name: merge_domain_metrics
+description: |
+  Merge per-sample taxonomic domain metrics TSVs into one table
+keywords:
+  - "taxonomy"
+  - "metrics"
+  - "merge"
+tools:
+  - merge_domain_metrics.py:
+      description: Merge per-sample domain classification metrics TSVs into one table
+      homepage: https://github.com/ajodeh-juma/wwMetagen/blob/master/bin/merge_domain_metrics.py
+      licence:
+        - "MIT"
+input:
+  - - metrics:
+        type: file
+        description: Computed metrics CSV file
+  - - value:
+        type: value
+        description: "Computed value: `val (prefix)`"
+output:
+  report:
+    - - "*_domain_metrics.tsv":
+          type: file
+          description: Report file
+authors:
+  - "@ajodeh-juma"
+maintainers:
+  - "@ajodeh-juma"

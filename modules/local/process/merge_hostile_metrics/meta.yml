@@ -1,0 +1,26 @@
+name: merge_hostile_metrics
+description: |
+  Merge per-sample host-read-removal (Hostile) metrics TSVs into one table
+keywords:
+  - "host removal"
+  - "hostile"
+  - "merge"
+tools:
+  - merge_hostile_metrics.py:
+      description: Merge per-sample host-read-removal (hostile) metrics TSVs into one table
+      homepage: https://github.com/ajodeh-juma/wwMetagen/blob/master/bin/merge_hostile_metrics.py
+      licence:
+        - "MIT"
+input:
+  - - reports:
+        type: file
+        description: Report file(s)
+output:
+  summary:
+    - - "hostile_dehosting_summary.tsv":
+          type: file
+          description: Summary file
+authors:
+  - "@ajodeh-juma"
+maintainers:
+  - "@ajodeh-juma"

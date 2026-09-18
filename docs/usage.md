@@ -1,12 +1,8 @@
-# nf-core/wwmetagen: Usage
-
-## :warning: Please read this documentation on the nf-core website: [https://nf-co.re/wwmetagen/usage](https://nf-co.re/wwmetagen/usage)
-
-> _Documentation of pipeline parameters is generated automatically from the pipeline schema and can no longer be found in markdown files._
+# wwMetagen: Usage
 
 ## Introduction
 
-<!-- TODO nf-core: Add documentation about anything specific to running your pipeline. For general topics, please point to (and add to) the main nf-core website. -->
+wwMetagen is built with the [nf-core](https://nf-co.re) pipeline template, so most of the generic usage guidance below (profiles, resource tuning, custom configs) applies as it would to any nf-core pipeline — see the [nf-core usage docs](https://nf-co.re/docs/usage/configuration) for background. Pipeline-specific parameters (`--analysis_type`, `--target_pathogen_taxid`, database paths, etc.) are documented in [`nextflow_schema.json`](../nextflow_schema.json) and summarised in the [top-level README](../README.md#pipeline-summary).
 
 ## Samplesheet input
 
@@ -57,7 +53,12 @@ An [example samplesheet](../assets/samplesheet.csv) has been provided with the p
 The typical command for running the pipeline is as follows:
 
 ```bash
-nextflow run nf-core/wwmetagen --input ./samplesheet.csv --outdir ./results --genome GRCh37 -profile docker
+nextflow run ajodeh-juma/wwMetagen \
+  --input ./samplesheet.csv \
+  --outdir ./results \
+  --analysis_type alignment \
+  --target_pathogen_taxid 573 \
+  -profile docker
 ```
 
 This will launch the pipeline with the `docker` configuration profile. See below for more information about profiles.
@@ -81,33 +82,32 @@ Pipeline settings can be provided in a `yaml` or `json` file via `-params-file <
 The above pipeline run specified with a params file in yaml format:
 
 ```bash
-nextflow run nf-core/wwmetagen -profile docker -params-file params.yaml
+nextflow run ajodeh-juma/wwMetagen -profile docker -params-file params.yaml
 ```
 
 with:
 
 ```yaml title="params.yaml"
-input: './samplesheet.csv'
-outdir: './results/'
-genome: 'GRCh37'
+input: "./samplesheet.csv"
+outdir: "./results/"
+analysis_type: "alignment"
+target_pathogen_taxid: 573
 <...>
 ```
-
-You can also generate such `YAML`/`JSON` files via [nf-core/launch](https://nf-co.re/launch).
 
 ### Updating the pipeline
 
 When you run the above command, Nextflow automatically pulls the pipeline code from GitHub and stores it as a cached version. When running the pipeline after this, it will always use the cached version if available - even if the pipeline has been updated since. To make sure that you're running the latest version of the pipeline, make sure that you regularly update the cached version of the pipeline:
 
 ```bash
-nextflow pull nf-core/wwmetagen
+nextflow pull ajodeh-juma/wwMetagen
 ```
 
 ### Reproducibility
 
 It is a good idea to specify the pipeline version when running the pipeline on your data. This ensures that a specific version of the pipeline code and software are used when you run your pipeline. If you keep using the same tag, you'll be running the same version of the pipeline, even if there have been changes to the code since.
 
-First, go to the [nf-core/wwmetagen releases page](https://github.com/nf-core/wwmetagen/releases) and find the latest pipeline version - numeric only (eg. `1.3.1`). Then specify this when running the pipeline with `-r` (one hyphen) - eg. `-r 1.3.1`. Of course, you can switch to another version by changing the number after the `-r` flag.
+Go to the [wwMetagen releases page](https://github.com/ajodeh-juma/wwMetagen/releases) (or use a commit SHA/branch name) and specify it when running the pipeline with `-r` (one hyphen) - e.g. `-r v1.0.0`. Of course, you can switch to another version by changing the value after the `-r` flag.
 
 This version number will be logged in reports when you run the pipeline, so that you'll know what you used when you look back in the future. For example, at the bottom of the MultiQC reports.
 
@@ -203,6 +203,41 @@ The Nextflow `-bg` flag launches Nextflow in the background, detached from your 
 
 Alternatively, you can use `screen` / `tmux` or similar tool to create a detached session which you can log back into at a later time.
 Some HPC setups also allow you to run nextflow within a cluster job submitted your job scheduler (from where it submits more jobs).
+
+## Batch processing on the ILRI HPC
+
+Processing many sequencing runs (e.g. on the ILRI SLURM cluster) is a **two-step** process: per-run pipeline execution, then a separate cross-run aggregation pass. The two steps use different tooling on purpose — see [Why aggregation is a separate step](#why-aggregation-is-a-separate-step) below.
+
+### Step 1 — [`runWWKenya.sh`](../runWWKenya.sh)
+
+A SLURM batch driver, submitted with `sbatch runWWKenya.sh`, that:
+
+1. Iterates over arrays of sequencing-run IDs (one array per platform: `miseq_i100_runs`, `miseq_runs`, `nextseq_550_runs`, `nextseq_2k_runs`), resolving each run's raw FASTQ directory.
+2. Generates a Nextflow samplesheet for each run (`bin/generate_csv_manifest.py`) if one doesn't already exist under `/var/scratch/$USER/<run_id>/metadata/`.
+3. Runs the pipeline once per sequencing run in `--analysis_type alignment` mode against a fixed target pathogen (`TAXID`/`GENUS`/`SPECIES`, set near the top of the script).
+4. `rsync`s the curated results (large/intermediate files excluded) to `~/projects/GenPath_Africa/wwmetagen/results/<run_id>/`.
+
+To process a new batch of runs or a new target pathogen, edit the run-ID arrays and the `TAXID`/`GENUS`/`SPECIES` variables at the top of the script.
+
+### Step 2 — `aggregate.sh`
+
+Once one or more runs have been processed by `runWWKenya.sh`, cross-run summary tables are built by a **separate** script that lives outside this repository, in the parent `ww-Kenya` project: `~/projects/ww-Kenya/scripts/aggregate.sh`. It:
+
+- Merges per-run fastp/Hostile QC summaries across every run under `~/projects/GenPath_Africa/wwmetagen/results/*/preprocessing/summary/` into `ww_fastp_report.tsv` / `ww_hostile_report.tsv`.
+- For each tracked pathogen `TAXID` (edit the `TAXIDS` array and the matching `PATHOGEN`/`ACCESSION`/`THRESHOLD` lookup in the script when you start tracking a new pathogen), merges pathogen coverage/abundance, nucleotide/Shannon diversity, AMRFinderPlus and ABRicate (ResFinder/CARD/PlasmidFinder/VFDB) tables across all runs into master TSVs under `~/projects/ww-Kenya/data/`.
+- Fetches/refreshes NCBI reference-genome metadata for each tracked pathogen.
+
+Run it manually with the `vibrio-typing-env` conda environment active (the script activates it itself):
+
+```bash
+~/projects/ww-Kenya/scripts/aggregate.sh
+```
+
+Re-run it any time you want the master tables to reflect everything `runWWKenya.sh` has processed so far — it re-globs all run directories each time, so it's safe to re-run after every new batch.
+
+### Why aggregation is a separate step
+
+`aggregate.sh` globs results across **every** run directory (`results/*/...`), i.e. across many independent `nextflow run` executions, not within a single one — so it can't be expressed as a process inside the pipeline's own Nextflow DAG the way the tool-specific steps under [`modules/local/process/`](../modules/local/process) are. It's intentionally kept as an external, independently-runnable script (with its own conda environment and metadata dependencies) rather than folded into `runWWKenya.sh` or the pipeline itself, so that re-aggregating doesn't require re-running (or waiting on) any Nextflow jobs.
 
 ## Nextflow memory requirements
 

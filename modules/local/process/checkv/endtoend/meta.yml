@@ -1,0 +1,89 @@
+name: checkv_endtoend
+description: |
+  Assess completeness and contamination of metagenome-assembled viral genomes with CheckV
+keywords:
+  - "checkv"
+  - "virus quality"
+  - "genomad"
+tools:
+  - checkv:
+      description: Assessing the quality of metagenome-assembled viral genomes
+      homepage: https://bitbucket.org/berkeleylab/checkv
+      doi: "10.1038/s41587-020-00774-7"
+      licence:
+        - "BSD-3-Clause-LBNL"
+input:
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. [ id:'test', single_end:false ]
+    - fasta:
+        type: file
+        description: Input FASTA sequence file
+  - - db:
+        type: file
+        description: Path to the tool/reference database directory or archive
+output:
+  quality_summary:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. [ id:'test', single_end:false ]
+      - "${prefix}/quality_summary.tsv":
+          type: file
+          description: CheckV quality summary TSV file
+  completeness:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. [ id:'test', single_end:false ]
+      - "${prefix}/completeness.tsv":
+          type: file
+          description: CheckV completeness TSV file
+  contamination:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. [ id:'test', single_end:false ]
+      - "${prefix}/contamination.tsv":
+          type: file
+          description: CheckV contamination TSV file
+  complete_genomes:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. [ id:'test', single_end:false ]
+      - "${prefix}/complete_genomes.tsv":
+          type: file
+          description: CheckV complete genomes TSV file
+  proviruses:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. [ id:'test', single_end:false ]
+      - "${prefix}/proviruses.fna":
+          type: file
+          description: Provirus sequences in FASTA format
+  viruses:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. [ id:'test', single_end:false ]
+      - "${prefix}/viruses.fna":
+          type: file
+          description: Virus sequences in FASTA format
+  versions:
+    - - "versions.yml":
+          type: file
+          description: File containing software versions
+authors:
+  - "@ajodeh-juma"
+maintainers:
+  - "@ajodeh-juma"

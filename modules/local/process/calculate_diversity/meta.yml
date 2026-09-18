@@ -1,0 +1,58 @@
+name: calculate_diversity
+description: |
+  Calculate per-window nucleotide and Shannon diversity metrics from a variant call file
+keywords:
+  - "diversity"
+  - "variants"
+  - "pi"
+  - "shannon"
+tools:
+  - calculate_diversity.py:
+      description: Compute per-window nucleotide (pi) and Shannon diversity metrics from a variant call file
+      homepage: https://github.com/ajodeh-juma/wwMetagen/blob/master/bin/calculate_diversity.py
+      licence:
+        - "MIT"
+input:
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. [ id:'test', single_end:false ]
+    - vcf:
+        type: file
+        description: VCF file
+  - - diversity_window_size:
+        type: value
+        description: Sliding window size (bp) used for diversity calculations
+output:
+  pi:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. [ id:'test', single_end:false ]
+      - "*_nucleotide_diversity.tsv":
+          type: file
+          description: Per-window nucleotide diversity (pi) TSV file
+  shannon:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. [ id:'test', single_end:false ]
+      - "*_shannon_diversity.tsv":
+          type: file
+          description: Per-window Shannon diversity TSV file
+  summary:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. [ id:'test', single_end:false ]
+      - "*_summary.txt":
+          type: file
+          description: Summary file
+authors:
+  - "@ajodeh-juma"
+maintainers:
+  - "@ajodeh-juma"

@@ -1,0 +1,31 @@
+name: minimap2_index
+description: |
+  Build a minimap2 index (.mmi) for a reference FASTA
+keywords:
+  - "alignment"
+  - "minimap2"
+  - "indexing"
+tools:
+  - minimap2:
+      description: Versatile pairwise aligner for genomic and spliced nucleotide sequences
+      homepage: https://github.com/lh3/minimap2
+      doi: "10.1093/bioinformatics/bty191"
+      licence:
+        - "MIT"
+input:
+  - - fasta:
+        type: file
+        description: Input FASTA sequence file
+output:
+  index:
+    - - "*.mmi":
+          type: file
+          description: Index file
+  versions:
+    - - "versions.yml":
+          type: file
+          description: File containing software versions
+authors:
+  - "@ajodeh-juma"
+maintainers:
+  - "@ajodeh-juma"

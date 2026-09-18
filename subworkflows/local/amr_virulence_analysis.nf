@@ -4,12 +4,12 @@
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
-include { ABRICATE_RUN_MULTIDB as ABRICATE_CONTIGS          } from '../../modules/local/process/abricate_multi'
-include { ABRICATE_RUN_MULTIDB as ABRICATE_BINS             } from '../../modules/local/process/abricate_multi'
-include { ABRICATE_SUMMARY                                  } from '../../modules/local/process/abricate_summary'
-include { AMRFINDERPLUS_UPDATE                              } from '../../modules/local/process/amrfinderplus_update'
-include { AMRFINDERPLUS_RUN as AMRFINDERPLUS_CONTIGS        } from '../../modules/local/process/amrfinderplus_run'
-include { AMRFINDERPLUS_RUN as AMRFINDERPLUS_BINS           } from '../../modules/local/process/amrfinderplus_run'
+include { ABRICATE_RUN_MULTIDB as ABRICATE_CONTIGS          } from '../../modules/local/process/abricate/run_multidb/main'
+include { ABRICATE_RUN_MULTIDB as ABRICATE_BINS             } from '../../modules/local/process/abricate/run_multidb/main'
+include { ABRICATE_SUMMARY                                  } from '../../modules/local/process/abricate/summary/main'
+include { AMRFINDERPLUS_UPDATE                              } from '../../modules/local/process/amrfinderplus/update/main'
+include { AMRFINDERPLUS_RUN as AMRFINDERPLUS_CONTIGS        } from '../../modules/local/process/amrfinderplus/run/main'
+include { AMRFINDERPLUS_RUN as AMRFINDERPLUS_BINS           } from '../../modules/local/process/amrfinderplus/run/main'
 
 
 workflow AMR_VIRULENCE_ANALYSIS {

@@ -1,0 +1,46 @@
+name: maxbin2_pileupcoverage
+description: |
+  Compute per-contig coverage/abundance from a BAM file with BBMap pileup.sh, for use as MaxBin2 abundance input
+keywords:
+  - "binning"
+  - "coverage"
+  - "bbmap"
+  - "maxbin2"
+tools:
+  - bbmap:
+      description: Suite of tools for DNA/RNA sequence alignment and analysis (pileup.sh computes per-contig coverage from a BAM file)
+      homepage: https://sourceforge.net/projects/bbmap/
+      licence:
+        - "BSD-3-Clause-LBNL"
+input:
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. [ id:'test', single_end:false ]
+    - bam:
+        type: file
+        description: BAM alignment file
+output:
+  coverage:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. [ id:'test', single_end:false ]
+      - "*.coverage.txt":
+          type: file
+          description: Per-contig/per-sample coverage file
+  abundance:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. [ id:'test', single_end:false ]
+      - "*.abundance.txt":
+          type: file
+          description: Abundance
+authors:
+  - "@ajodeh-juma"
+maintainers:
+  - "@ajodeh-juma"

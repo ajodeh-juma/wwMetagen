@@ -1,0 +1,45 @@
+name: abricate_run_multidb
+description: |
+  Screen a FASTA file or a directory of FASTA files against one or more ABRicate databases
+keywords:
+  - "amr"
+  - "virulence"
+  - "screening"
+  - "abricate"
+tools:
+  - abricate:
+      description: Mass screening of contigs for antimicrobial resistance or virulence genes
+      homepage: https://github.com/tseemann/abricate
+      documentation: https://github.com/tseemann/abricate
+      licence:
+        - "GPL-2.0-or-later"
+input:
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. [ id:'test', single_end:false ]
+    - fasta:
+        type: file
+        description: Input FASTA sequence file
+  - - db_list:
+        type: value
+        description: List of ABRicate database names to screen against
+output:
+  report:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. [ id:'test', single_end:false ]
+      - "*.tsv":
+          type: file
+          description: Report file
+  versions:
+    - - "versions.yml":
+          type: file
+          description: File containing software versions
+authors:
+  - "@ajodeh-juma"
+maintainers:
+  - "@ajodeh-juma"

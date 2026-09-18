@@ -1,0 +1,40 @@
+name: coverm_contig
+description: |
+  Compute per-contig read coverage depth from a BAM file with CoverM
+keywords:
+  - "coverage"
+  - "coverm"
+  - "binning"
+tools:
+  - coverm:
+      description: Fast DNA read coverage and relative abundance calculator focused on metagenomics
+      homepage: https://github.com/wwood/CoverM
+      licence:
+        - "GPL-3.0-only"
+input:
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. [ id:'test', single_end:false ]
+    - bam:
+        type: file
+        description: BAM alignment file
+output:
+  coverage:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. [ id:'test', single_end:false ]
+      - "*.depth.txt":
+          type: file
+          description: Per-contig/per-sample coverage file
+  versions:
+    - - "versions.yml":
+          type: file
+          description: File containing software versions
+authors:
+  - "@ajodeh-juma"
+maintainers:
+  - "@ajodeh-juma"

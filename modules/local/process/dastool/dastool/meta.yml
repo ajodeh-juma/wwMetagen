@@ -1,0 +1,65 @@
+name: dastool_dastool
+description: |
+  Aggregate and score bins produced by multiple binners with DAS Tool to recover a consolidated, non-redundant bin set
+keywords:
+  - "binning"
+  - "dastool"
+  - "metagenomics"
+tools:
+  - das_tool:
+      description: Recovery of genomes from metagenomes via a dereplication, aggregation and scoring strategy
+      homepage: https://github.com/cmks/DAS_Tool
+      doi: "10.1038/s41564-018-0171-1"
+      licence:
+        - "BSD-2-Clause"
+input:
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. [ id:'test', single_end:false ]
+    - contigs:
+        type: file
+        description: Assembled contig sequences in FASTA format
+    - tsvs:
+        type: file
+        description: Tsvs
+    - binner_names:
+        type: value
+        description: Names of the binning tools that produced each input bin set
+output:
+  log:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. [ id:'test', single_end:false ]
+      - "*.log":
+          type: file
+          description: Log file
+  summary:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. [ id:'test', single_end:false ]
+      - "*_summary.tsv":
+          type: file
+          description: Summary file
+  bins:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. [ id:'test', single_end:false ]
+      - "*_DASTool_bins/*.fa":
+          type: file
+          description: Recovered genome bin FASTA file(s)
+  versions:
+    - - "versions.yml":
+          type: file
+          description: File containing software versions
+authors:
+  - "@ajodeh-juma"
+maintainers:
+  - "@ajodeh-juma"

@@ -1,0 +1,77 @@
+name: megahit_megahit
+description: |
+  Assemble reads into contigs with MEGAHIT
+keywords:
+  - "assembly"
+  - "megahit"
+  - "metagenomics"
+tools:
+  - megahit:
+      description: Ultra-fast single-node solution for large and complex metagenomics assembly
+      homepage: https://github.com/voutcn/megahit
+      doi: "10.1093/bioinformatics/btv033"
+      licence:
+        - "GPL-3.0-only"
+input:
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. [ id:'test', single_end:false ]
+    - reads:
+        type: file
+        description: List of input FASTQ files
+output:
+  contigs:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. [ id:'test', single_end:false ]
+      - "megahit_out/*.contigs.fa":
+          type: file
+          description: Assembled contig sequences in FASTA format
+  k_contigs:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. [ id:'test', single_end:false ]
+      - "megahit_out/intermediate_contigs/k*.contigs.fa.gz":
+          type: file
+          description: MEGAHIT intermediate k-mer contigs
+  addi_contigs:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. [ id:'test', single_end:false ]
+      - "megahit_out/intermediate_contigs/k*.addi.fa.gz":
+          type: file
+          description: MEGAHIT intermediate additional contigs
+  local_contigs:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. [ id:'test', single_end:false ]
+      - "megahit_out/intermediate_contigs/k*.local.fa.gz":
+          type: file
+          description: MEGAHIT intermediate local-assembly contigs
+  kfinal_contigs:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. [ id:'test', single_end:false ]
+      - "megahit_out/intermediate_contigs/k*.final.contigs.fa.gz":
+          type: file
+          description: MEGAHIT final intermediate contigs
+  versions:
+    - - "versions.yml":
+          type: file
+          description: File containing software versions
+authors:
+  - "@ajodeh-juma"
+maintainers:
+  - "@ajodeh-juma"

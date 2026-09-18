@@ -4,7 +4,7 @@
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
-include { DOWNLOAD_NCBI_TAXONOMY              } from '../../modules/local/process/download_ncbi_taxonomy'
+include { DOWNLOAD_NCBI_TAXONOMY              } from '../../modules/local/process/download_ncbi_taxonomy/main'
 include { NCBI_DATASETS_DOWNLOAD_GENOMES      } from '../../modules/local/process/ncbi_datasets_download_genomes'
 
 workflow PREPARE_TARGET_GENOMES {
