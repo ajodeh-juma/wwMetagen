@@ -82,7 +82,7 @@ Local, pipeline-specific processes live under [`modules/local/process/`](modules
 
 ## Credits
 
-wwMetagen was written by [Juma Ajodeh](https://github.com/ajodeh-juma).
+wwMetagen was written by [John Juma](https://github.com/ajodeh-juma).
 
 ## Contributions and support
 
