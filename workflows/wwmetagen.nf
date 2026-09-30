@@ -113,12 +113,14 @@ workflow WWMETAGEN {
 
         // Kraken 2 database
         if (params.kraken2_db) {
-            ch_kraken2_db = channel.fromPath(params.kraken2_db, type: 'dir')
+            // ch_kraken2_db = channel.fromPath(params.kraken2_db, type: 'dir')
+            ch_kraken2_db = channel.fromPath(params.kraken2_db, type: 'dir').first()
         } else if (params.kraken2_db == null) {
             exit 1, "Missing options, database path: ${params.kraken2_db}"
         }
 
-        TAXONOMIC_PROFILING(ch_hostile_clean_reads, ch_kraken2_db.collect() )
+        // TAXONOMIC_PROFILING(ch_hostile_clean_reads, ch_kraken2_db.collect() )
+        TAXONOMIC_PROFILING(ch_hostile_clean_reads, ch_kraken2_db )
     }
     
     else if (params.analysis_type == 'alignment') {

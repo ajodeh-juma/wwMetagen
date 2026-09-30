@@ -11,7 +11,8 @@ process KRAKEN2_KRAKEN2 {
 
     input:
     tuple val(meta), path(reads)
-    path  db
+    // path  db
+    val db
 
     output:
     tuple val(meta), path('*.classified.fastq.gz')  , emit: classified  , optional: true
@@ -33,6 +34,7 @@ process KRAKEN2_KRAKEN2 {
     kraken2 \\
         --db $db \\
         --threads $task.cpus \\
+        --memory-mapping \\
         --unclassified-out $unclassified \\
         --classified-out $classified \\
         --report ${prefix}.kraken2.report.txt \\
