@@ -3,6 +3,7 @@
 Merge mpa-style Kraken/Bracken tables into a single table with clean sample names.
 """
 
+import io
 import os
 import logging
 import argparse
@@ -58,11 +59,23 @@ def merge_mpa(input_files, prefix, outdir):
         
         try:
             # MPA files usually have two columns: [Taxonomy, Abundance]
-            # We read with no header because some MPA files have comment lines
+            # Drop only genuine header/comment lines (lines that *start* with
+            # '#', e.g. kreport2mpa's "#mpa_v3" header). We deliberately don't
+            # use pandas' `comment='#'` here: it treats a '#' ANYWHERE on a
+            # line as starting an inline comment, so a clade name containing a
+            # literal '#' (e.g. "unidentified eubacterium clone LGB#21") would
+            # have everything after the '#' silently discarded - including
+            # the tab and the actual abundance value for that row.
+            with open(f) as fh:
+                data_lines = [line for line in fh if not line.startswith('#')]
+
+            if not data_lines:
+                logging.warning(f"No data rows found in {f} (only header/comment lines)")
+                continue
+
             df = pd.read_csv(
-                f,
+                io.StringIO(''.join(data_lines)),
                 sep='\t',
-                comment='#',
                 header=None,
                 names=['clade_name', sample],
                 index_col='clade_name'
