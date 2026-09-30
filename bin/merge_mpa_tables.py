@@ -60,13 +60,26 @@ def merge_mpa(input_files, prefix, outdir):
             # MPA files usually have two columns: [Taxonomy, Abundance]
             # We read with no header because some MPA files have comment lines
             df = pd.read_csv(
-                f, 
-                sep='\t', 
-                comment='#', 
-                header=None, 
+                f,
+                sep='\t',
+                comment='#',
+                header=None,
                 names=['clade_name', sample],
                 index_col='clade_name'
             )
+            # Some MPA reports contain duplicate clade_name rows (e.g. from
+            # kreport2mpa collapsing multiple taxa to the same label).
+            # pd.concat(axis=1) requires a unique index, so collapse
+            # duplicates within this sample first by summing their abundances.
+            if df.index.has_duplicates:
+                dupe_names = sorted(df.index[df.index.duplicated()].unique())
+                shown = ", ".join(dupe_names[:10])
+                more = f" (+{len(dupe_names) - 10} more)" if len(dupe_names) > 10 else ""
+                logging.warning(
+                    f"{sample}: collapsing {len(dupe_names)} duplicate clade_name "
+                    f"value(s) by summing their abundances: {shown}{more}"
+                )
+                df = df.groupby(df.index).sum()
             data_frames.append(df)
         except Exception as e:
             logging.error(f"Failed to process {f}: {e}")
